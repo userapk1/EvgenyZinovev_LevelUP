@@ -11,6 +11,14 @@ target/
 *.iws
 *.iml
 *.ipr
+.idea
+.etc
+etc.
+workspace.xml
+vcs.xml
+misc.xml
+checkstyle-idea.xml
+
 
 ### Eclipse ###
 .apt_generated
