@@ -6,8 +6,8 @@ import org.junit.platform.suite.api.SelectPackages;
 import org.junit.platform.suite.api.Suite;
 
 @Suite
-@IncludeTags({"PositiveTag"})
-@SelectPackages({"src/test/java/ticket/test/hm2"})
-@IncludeClassNamePatterns(".*IT")
+@IncludeTags({"Positive_Tag"})
+@SelectPackages({"ticket.test.hm2"})
+@IncludeClassNamePatterns(".*Test")
 public class PositiveSuite {
 }

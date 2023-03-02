@@ -6,8 +6,8 @@ import org.junit.platform.suite.api.SelectPackages;
 import org.junit.platform.suite.api.Suite;
 
 @Suite
-@IncludeTags({"NegativeTag"})
-@SelectPackages({"src/test/java/ticket/test/hm2"})
-@IncludeClassNamePatterns(".*IT")
+@IncludeTags({"Negative_Tag"})
+@SelectPackages({"ticket.test.hm2"})
+@IncludeClassNamePatterns(".*Test")
 public class NegativeSuite {
 }
