@@ -131,7 +131,7 @@
             <version>${maven-surefire-plugin.version}</version>
             <configuration>
               <includes>
-                      <include>**/*Suite.class</include>
+                      <include>${class.name}</include>
               </includes>
                 <!--<skip>true</skip>-->
             </configuration>
