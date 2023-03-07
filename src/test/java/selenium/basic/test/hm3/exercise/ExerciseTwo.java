@@ -1,5 +1,7 @@
 package selenium.basic.test.hm3.exercise;
 
+import java.util.List;
+import java.util.stream.Collectors;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -9,8 +11,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import selenium.basic.test.hm3.BaseSeleniumTest;
 import selenium.basic.test.hm3.annotation.AllSeleniumOneTag;
 import utils.SleepUtils;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class ExerciseTwo extends BaseSeleniumTest {
 
@@ -48,8 +48,8 @@ public class ExerciseTwo extends BaseSeleniumTest {
 
         //проверяем шо ход выполнен
         SleepUtils.sleep(2000);
-        List<WebElement> searchList = wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(By.
-            xpath("//div[contains(@class, 'layout__column_left')]//a[contains(@class,"
+        List<WebElement> searchList = wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(By
+            .xpath("//div[contains(@class, 'layout__column_left')]//a[contains(@class,"
                 + " 'child-level_0')]//div[@class='nav__folder-name__txt']"), 3));
 
         Assertions.assertThat(searchList.stream().map(WebElement::getText).collect(Collectors.toList()))
@@ -100,12 +100,13 @@ public class ExerciseTwo extends BaseSeleniumTest {
         SleepUtils.sleep(3000);
         //close frame
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-            "//div[contains(@class, 'layer layer')]//span[@class='button2__wrapper button2__wrapper_centered']"))).click();
+            "//div[contains(@class, 'layer layer')]//span[@class='button2__wrapper button2__wrapper_centered']")))
+            .click();
 
         SleepUtils.sleep(2000);
         int emailsInSent2 = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(
             "//div[@class='ReactVirtualized__Grid__innerScrollContainer']/a"))).size();
-        Assertions.assertThat(emailsInSent<emailsInSent2).isTrue();
+        Assertions.assertThat(emailsInSent < emailsInSent2).isTrue();
 
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
             "//div[contains(@class, 'sidebar__header')]//span[@class='sidebar__menu-ico']"))).click();
@@ -116,7 +117,7 @@ public class ExerciseTwo extends BaseSeleniumTest {
         SleepUtils.sleep(2000);
         int emailsInTest2 = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(
             "//div[@class='ReactVirtualized__Grid__innerScrollContainer']/a"))).size();
-        Assertions.assertThat(emailsInTest<emailsInTest2).isTrue();
+        Assertions.assertThat(emailsInTest < emailsInTest2).isTrue();
 
         //открываем письмо в папке тест
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
@@ -124,7 +125,8 @@ public class ExerciseTwo extends BaseSeleniumTest {
 
         //проверяяем соответствие полей
         String checkFieldTo = wait.until(ExpectedConditions.visibilityOfElementLocated(By
-                                           .xpath("//div[contains(@class, 'letter__author')]//span[@class='letter-contact']")))
+                                      .xpath("//div[contains(@class, 'letter__author')]"
+                                          + "//span[@class='letter-contact']")))
                                        .getAttribute("title");
         Assertions.assertThat(letterForMe).isEqualTo(checkFieldTo);
 
@@ -133,7 +135,8 @@ public class ExerciseTwo extends BaseSeleniumTest {
         Assertions.assertThat(subjectForMe).isEqualTo(checkFieldSubject);
 
         String checkFieldBody = wait.until(ExpectedConditions.visibilityOfElementLocated(By
-            .xpath("//div[contains(@class, 'style')]//div[contains(@class, 'js-helper')]/div/div/div/div[1]"))).getText();
+            .xpath("//div[contains(@class, 'style')]//div[contains(@class, 'js-helper')]/div/div/div/div[1]")))
+                                    .getText();
         Assertions.assertThat(bodyLetter).isEqualTo(checkFieldBody);
 
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(

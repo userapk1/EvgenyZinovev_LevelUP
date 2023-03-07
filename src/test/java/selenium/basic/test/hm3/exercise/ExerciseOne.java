@@ -1,5 +1,7 @@
 package selenium.basic.test.hm3.exercise;
 
+import java.util.List;
+import java.util.stream.Collectors;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -9,17 +11,15 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import selenium.basic.test.hm3.BaseSeleniumTest;
 import selenium.basic.test.hm3.annotation.AllSeleniumOneTag;
 import utils.SleepUtils;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public  class ExerciseOne extends BaseSeleniumTest {
 
 
     @Test
     @AllSeleniumOneTag
-    void loginCreateSaveToDraftSend(){
-    driver.navigate().to(URL);
-    /*var title = driver.getTitle();
+    void loginCreateSaveToDraftSend() {
+        driver.navigate().to(URL);
+        /*var title = driver.getTitle();
         Assertions.assertThat(title).isEqualTo("Mail.ru: почта, поиск в интернете, новости, игры");*/
 
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
@@ -61,14 +61,14 @@ public  class ExerciseOne extends BaseSeleniumTest {
 
         //попытка переписать под явное
         SleepUtils.sleep(2000);
-        List<WebElement> searchList = wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(By.
-            xpath("//div[contains(@class, 'layout__column_left')]//a[contains(@class,"
+        List<WebElement> searchList = wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(By
+            .xpath("//div[contains(@class, 'layout__column_left')]//a[contains(@class,"
                 + " 'child-level_0')]//div[@class='nav__folder-name__txt']"), 3));
 
         Assertions.assertThat(searchList.stream().map(WebElement::getText).collect(Collectors.toList()))
                   .hasSize(7);
 
-/*Assertions.assertThat(searchList.stream().map(WebElement::getText).collect(Collectors.toList()))
+        /*Assertions.assertThat(searchList.stream().map(WebElement::getText).collect(Collectors.toList()))
                   .containsExactly("Входящие", "Отправленные", "Черновики", "Спам", "Корзина");*/
 
 
@@ -86,8 +86,10 @@ public  class ExerciseOne extends BaseSeleniumTest {
 
         SleepUtils.sleep(2000);
         //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!уточнить как обыграть тему с ифом если черновики пусты
-        int emailsInDrafts = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(
-            "//div[contains(@class, 'ReactVirtualized__Grid')]/div[contains(@class, 'ReactVirtualized__Grid')]/a"))).size();
+        int emailsInDrafts;
+        emailsInDrafts = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(
+            "//div[contains(@class, 'ReactVirtualized__Grid')]/div[contains(@class, 'ReactVirtualized__Grid')]/a")))
+                                 .size();
         //System.out.println(emailsInDrafts);
 
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
@@ -117,10 +119,11 @@ public  class ExerciseOne extends BaseSeleniumTest {
 
         SleepUtils.sleep(2000);
         int emailsInDrafts2 = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(
-            "//div[contains(@class, 'ReactVirtualized__Grid')]/div[contains(@class, 'ReactVirtualized__Grid')]/a"))).size();
+            "//div[contains(@class, 'ReactVirtualized__Grid')]/div[contains(@class, 'ReactVirtualized__Grid')]/a")))
+                                  .size();
         //System.out.println(emailsInDrafts2);
         //проверяем што черновик сохранен
-        Assertions.assertThat(emailsInDrafts2>emailsInDrafts).isTrue();
+        Assertions.assertThat(emailsInDrafts2 > emailsInDrafts).isTrue();
 
 
         //6.Verify контент, адресата и тему письма (должно совпадать с пунктом 3)
@@ -128,7 +131,7 @@ public  class ExerciseOne extends BaseSeleniumTest {
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
             "//div[@class='layout__main-frame']//a[contains(@class,'llc llc_normal llc_first')]"))).click();
 
-       String checkFieldTo = wait.until(ExpectedConditions.visibilityOfElementLocated(By
+        String checkFieldTo = wait.until(ExpectedConditions.visibilityOfElementLocated(By
             .xpath("//div[contains(@class, 'head_container')]//span[contains(@class, 'text')]"))).getText();
         //System.out.println(checkFieldTo);
         Assertions.assertThat(destination).isEqualTo(checkFieldTo);
@@ -140,7 +143,8 @@ public  class ExerciseOne extends BaseSeleniumTest {
         Assertions.assertThat(subject).isEqualTo(checkFieldSubject);
 
         String checkFieldBody = wait.until(ExpectedConditions.visibilityOfElementLocated(By
-            .xpath("//div[contains(@class, 'compose-app_fix')]//div[contains(@class, 'js-helper')]/div/div/div/div[1]"))).getText();
+            .xpath("//div[contains(@class, 'compose-app_fix')]"
+                + "//div[contains(@class, 'js-helper')]/div/div/div/div[1]"))).getText();
         Assertions.assertThat(bodyLetter).isEqualTo(checkFieldBody);
 
 
@@ -149,30 +153,32 @@ public  class ExerciseOne extends BaseSeleniumTest {
         SleepUtils.sleep(3000);
         //close frame
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-            "//div[contains(@class, 'layer layer')]//span[@class='button2__wrapper button2__wrapper_centered']"))).click();
+            "//div[contains(@class, 'layer layer')]//span[@class='button2__wrapper button2__wrapper_centered']")))
+            .click();
 
         //8.ПРОВНРЯЕМ Verify, что письмо исчезло из черновиков
         int emailsInDrafts3 = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(
-            "//div[contains(@class, 'ReactVirtualized__Grid')]/div[contains(@class, 'ReactVirtualized__Grid')]/a"))).size();
-        Assertions.assertThat(emailsInDrafts2>emailsInDrafts3).isTrue();
+            "//div[contains(@class, 'ReactVirtualized__Grid')]/div[contains(@class, 'ReactVirtualized__Grid')]/a")))
+                                  .size();
+        Assertions.assertThat(emailsInDrafts2 > emailsInDrafts3).isTrue();
 
         SleepUtils.sleep(3000);
         //!!!!!!!!!!!!!!!!!!!!!!!!!!почему не находик кнопку?!
-       wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
             "//div[contains(@class, 'application-mail__layout')]//a[@title='Отправленные']"))).click();
 
         int emailsInSent2 = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(
             "//div[@class='ReactVirtualized__Grid__innerScrollContainer']/a"))).size();
         System.out.println(emailsInSent2);
-        Assertions.assertThat(emailsInSent2>emailsInSent).isTrue();
+        Assertions.assertThat(emailsInSent2 > emailsInSent).isTrue();
 
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
             "//div[contains(@class, 'ph-auth')]//div[contains(@class, 'ph-project__account')]"))).click();
 
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-            "//div[contains(@class, 'ph-auth')]//div[contains(@class, 'ph-project__account')]"))).click();
+            "//div[contains(@class, 'ph-item__hover-active')]/div[contains(@class, 'ph-text')]"))).click();
         SleepUtils.sleep(3000);
     }
 
 
-    }
+}

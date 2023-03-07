@@ -20,7 +20,6 @@
         <junit-platform-suite-engine.version>1.9.2</junit-platform-suite-engine.version>
         <maven-checkstyle-plugin.version>3.2.0</maven-checkstyle-plugin.version>
         <maven-surefire-plugin.version>3.0.0-M8</maven-surefire-plugin.version>
-        <junit-platform-surefire-provider.version>1.3.2</junit-platform-surefire-provider.version>
         <junit-jupiter-engine.version>5.9.2</junit-jupiter-engine.version>
         <selenium-java.version>4.8.1</selenium-java.version>
         <assertj-core.version>3.24.2</assertj-core.version>
@@ -29,12 +28,12 @@
 
     <profiles>
     <profile>
-        <id>positive-suite</id>
+        <id>all-test-selenium</id>
         <activation>
             <activeByDefault>true</activeByDefault>
         </activation>
         <properties>
-            <suite.class>${project.basedir}src/test/java/ticket/test/hm2/suites/PositiveSuite.java</suite.class>
+            <suite.class>**/hm3/exercise/*.class</suite.class>
         </properties>
     </profile>
 
@@ -59,13 +58,6 @@
             <artifactId>junit-jupiter</artifactId>
             <version>${junit-jupiter.version}</version>
             <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.junit.platform</groupId>
-            <artifactId>junit-platform-surefire-provider</artifactId>
-            <version>${junit-platform-surefire-provider.version}</version>
-                <scope>test</scope>
         </dependency>
 
         <dependency>
@@ -140,7 +132,7 @@
             <version>${maven-surefire-plugin.version}</version>
             <configuration>
               <includes>
-                      <include>**/*Suite.class</include>
+                      <include>${suite.class}</include>
               </includes>
             </configuration>
             </plugin>

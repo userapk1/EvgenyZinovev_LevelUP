@@ -1,5 +1,7 @@
 package selenium.basic.test.hm3.exercise;
 
+import java.util.List;
+import java.util.stream.Collectors;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -9,8 +11,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import selenium.basic.test.hm3.BaseSeleniumTest;
 import selenium.basic.test.hm3.annotation.AllSeleniumOneTag;
 import utils.SleepUtils;
-import java.util.List;
-import java.util.stream.Collectors;
+
 
 public class ExeciseThree extends BaseSeleniumTest {
 
@@ -45,9 +46,10 @@ public class ExeciseThree extends BaseSeleniumTest {
         driver.switchTo().window(currentHandle);
 
         //проверяем шо ход выполнен
-        SleepUtils.sleep(2000);
-        List<WebElement> searchList = wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(By.
-            xpath("//div[contains(@class, 'layout__column_left')]//a[contains(@class,"
+        SleepUtils
+            .sleep(2000);
+        List<WebElement> searchList = wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(By
+            .xpath("//div[contains(@class, 'layout__column_left')]//a[contains(@class,"
                 + " 'child-level_0')]//div[@class='nav__folder-name__txt']"), 3));
 
         Assertions.assertThat(searchList.stream().map(WebElement::getText).collect(Collectors.toList()))
@@ -55,10 +57,12 @@ public class ExeciseThree extends BaseSeleniumTest {
 
         //чек скока писем во вх себе
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-            "//div[@class='ReactVirtualized__Grid__innerScrollContainer']//div[@class='metathread__contain']/div/a"))).click();
+            "//div[@class='ReactVirtualized__Grid__innerScrollContainer']//div[@class='metathread__contain']/div/a")))
+            .click();
 
         SleepUtils.sleep(2000);
-        int emailsInIncoming = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(
+        int emailsInIncoming;
+        emailsInIncoming = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(
             "//div[@class='ReactVirtualized__Grid__innerScrollContainer']/a"))).size();
 
         //check garbage
@@ -66,7 +70,8 @@ public class ExeciseThree extends BaseSeleniumTest {
             "//div[contains(@class, 'application-mail__layout')]//a[contains(@title, 'Корзина')]"))).click();
 
         SleepUtils.sleep(2000);
-        int emailsInGarbage = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(
+        int emailsInGarbage;
+        emailsInGarbage = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(
             "//div[@class='ReactVirtualized__Grid__innerScrollContainer']/a"))).size();
 
         //нажимаем написать письмо
@@ -92,7 +97,8 @@ public class ExeciseThree extends BaseSeleniumTest {
         SleepUtils.sleep(3000);
         //close frame
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-            "//div[contains(@class, 'layer layer')]//span[@class='button2__wrapper button2__wrapper_centered']"))).click();
+            "//div[contains(@class, 'layer layer')]//span[@class='button2__wrapper button2__wrapper_centered']")))
+            .click();
 
         //чек писем во вх себе
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
@@ -104,7 +110,7 @@ public class ExeciseThree extends BaseSeleniumTest {
         SleepUtils.sleep(2000);
         int emailsInIncoming2 = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(
             "//div[@class='ReactVirtualized__Grid__innerScrollContainer']/a"))).size();
-        Assertions.assertThat(emailsInIncoming<emailsInIncoming2).isTrue();
+        Assertions.assertThat(emailsInIncoming < emailsInIncoming2).isTrue();
 
         //открываем письмо в папке вх себе
         /*wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
@@ -115,7 +121,8 @@ public class ExeciseThree extends BaseSeleniumTest {
 
         //проверяяем соответствие полей
         String checkFieldTo = wait.until(ExpectedConditions.visibilityOfElementLocated(By
-                                      .xpath("//div[contains(@class, 'letter__author')]//span[@class='letter-contact']")))
+                                      .xpath("//div[contains(@class, 'letter__author')]"
+                                          + "//span[@class='letter-contact']")))
                                   .getAttribute("title");
         Assertions.assertThat(letterForMe).isEqualTo(checkFieldTo);
 
@@ -124,7 +131,8 @@ public class ExeciseThree extends BaseSeleniumTest {
         Assertions.assertThat(subject).isEqualTo(checkFieldSubject);
 
         String checkFieldBody = wait.until(ExpectedConditions.visibilityOfElementLocated(By
-            .xpath("//div[contains(@class, 'style')]//div[contains(@class, 'js-helper')]/div/div/div/div[1]"))).getText();
+            .xpath("//div[contains(@class, 'style')]//div[contains(@class, 'js-helper')]/div/div/div/div[1]")))
+                                    .getText();
         Assertions.assertThat(bodyLetter).isEqualTo(checkFieldBody);
 
         //удаляем письмо
@@ -142,7 +150,7 @@ public class ExeciseThree extends BaseSeleniumTest {
         SleepUtils.sleep(2000);
         int emailsInGarbage2 = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(
             "//div[@class='ReactVirtualized__Grid__innerScrollContainer']/a"))).size();
-        Assertions.assertThat(emailsInGarbage<emailsInGarbage2).isTrue();
+        Assertions.assertThat(emailsInGarbage < emailsInGarbage2).isTrue();
 
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
             "//div[contains(@class, 'ph-auth')]//div[contains(@class, 'ph-project__account')]"))).click();
