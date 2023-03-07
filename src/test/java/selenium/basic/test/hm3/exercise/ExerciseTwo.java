@@ -62,10 +62,9 @@ public class ExerciseTwo extends BaseSeleniumTest {
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
             "//nav[contains(@class, 'nav nav_expanded nav_hover-support')]//a[contains(@title, 'Тест')]"))).click();
 
-        //!!!!!!!!!ПЕРЕПИСАТЬ С ИФОМ от емпти
         int emailsInTest = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(
             "//div[@class='ReactVirtualized__Grid__innerScrollContainer']/a"))).size();
-        System.out.println(emailsInTest);
+        //System.out.println(emailsInTest);
 
         //чекаем скока писем в отправленных
         SleepUtils.sleep(2000);
@@ -75,7 +74,7 @@ public class ExerciseTwo extends BaseSeleniumTest {
         SleepUtils.sleep(2000);
         int emailsInSent = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(
             "//div[@class='ReactVirtualized__Grid__innerScrollContainer']/a"))).size();
-        System.out.println(emailsInSent);
+        //System.out.println(emailsInSent);
 
         //нажимаем написать письмо
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
@@ -144,7 +143,6 @@ public class ExerciseTwo extends BaseSeleniumTest {
 
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
             "//div[contains(@class, 'ph-item__hover-active')]/div[contains(@class, 'ph-text')]"))).click();
-        SleepUtils.sleep(3000);
 
 
     }

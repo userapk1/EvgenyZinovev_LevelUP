@@ -52,7 +52,7 @@ public  class ExerciseOne extends BaseSeleniumTest {
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
             "//*[@id='login-content']//button[@data-test-id='submit-button']"))).click();
 
-        SleepUtils.sleep(3000);
+        SleepUtils.sleep(2000);
         var currentHandle = driver.getWindowHandle();
         driver.switchTo().window(currentHandle);
 
@@ -77,7 +77,7 @@ public  class ExerciseOne extends BaseSeleniumTest {
             "//div[contains(@class, 'application-mail__layout')]//a[contains(@title, 'Отправленные')]"))).click();
 
         int emailsInSent = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(
-            "//div[@class='ReactVirtualized__Grid__innerScrollContainer']/a"))).size();
+            "//*[@href = '/sent/?']"))).size();
         System.out.println(emailsInSent);
 
         //cмотрим скока записей в черновиках
@@ -85,7 +85,6 @@ public  class ExerciseOne extends BaseSeleniumTest {
             "//div[contains(@id, 'sideBarContent')]//a[@title= 'Черновики']"))).click();
 
         SleepUtils.sleep(2000);
-        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!уточнить как обыграть тему с ифом если черновики пусты
         int emailsInDrafts;
         emailsInDrafts = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(
             "//div[contains(@class, 'ReactVirtualized__Grid')]/div[contains(@class, 'ReactVirtualized__Grid')]/a")))
@@ -125,8 +124,6 @@ public  class ExerciseOne extends BaseSeleniumTest {
         //проверяем што черновик сохранен
         Assertions.assertThat(emailsInDrafts2 > emailsInDrafts).isTrue();
 
-
-        //6.Verify контент, адресата и тему письма (должно совпадать с пунктом 3)
         //открываем сохраненное письмо
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
             "//div[@class='layout__main-frame']//a[contains(@class,'llc llc_normal llc_first')]"))).click();
@@ -162,15 +159,15 @@ public  class ExerciseOne extends BaseSeleniumTest {
                                   .size();
         Assertions.assertThat(emailsInDrafts2 > emailsInDrafts3).isTrue();
 
-        SleepUtils.sleep(3000);
-        //!!!!!!!!!!!!!!!!!!!!!!!!!!почему не находик кнопку?!
+        SleepUtils.sleep(2000);
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-            "//div[contains(@class, 'application-mail__layout')]//a[@title='Отправленные']"))).click();
+            "//*[@href = '/sent/?']"))).click();
 
+        SleepUtils.sleep(2000);
         int emailsInSent2 = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(
             "//div[@class='ReactVirtualized__Grid__innerScrollContainer']/a"))).size();
         System.out.println(emailsInSent2);
-        Assertions.assertThat(emailsInSent2 > emailsInSent).isTrue();
+        Assertions.assertThat(emailsInSent < emailsInSent2).isTrue();
 
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
             "//div[contains(@class, 'ph-auth')]//div[contains(@class, 'ph-project__account')]"))).click();

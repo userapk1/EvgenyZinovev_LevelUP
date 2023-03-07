@@ -67,7 +67,7 @@ public class ExeciseThree extends BaseSeleniumTest {
 
         //check garbage
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-            "//div[contains(@class, 'application-mail__layout')]//a[contains(@title, 'Корзина')]"))).click();
+            "//a[@href='/trash/?']"))).click();
 
         SleepUtils.sleep(2000);
         int emailsInGarbage;
@@ -143,9 +143,8 @@ public class ExeciseThree extends BaseSeleniumTest {
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
             "//div[contains(@class, 'portal-menu-element_back')]/span[@title='Вернуться']"))).click();
 
-        //!!!!!!!!!!!!НЕ НАХОДИТ КНОПКУ
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-            "//div[contains(@class, 'application-mail__layout')]//a[contains(@title, 'Корзина')]"))).click();
+            "//a[@href='/trash/?']"))).click();
 
         SleepUtils.sleep(2000);
         int emailsInGarbage2 = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(
@@ -157,7 +156,6 @@ public class ExeciseThree extends BaseSeleniumTest {
 
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
             "//div[contains(@class, 'ph-item__hover-active')]/div[contains(@class, 'ph-text')]"))).click();
-        SleepUtils.sleep(3000);
 
 
     }
