@@ -63,7 +63,7 @@ public class ExerciseTwo extends BaseSeleniumTest {
             "//nav[contains(@class, 'nav nav_expanded nav_hover-support')]//a[contains(@title, 'Тест')]"))).click();
 
         int emailsInTest = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(
-            "//div[@class='ReactVirtualized__Grid__innerScrollContainer']/a"))).size();
+            "//*[@class='ReactVirtualized__Grid__innerScrollContainer']/a"))).size();
         //System.out.println(emailsInTest);
 
         //чекаем скока писем в отправленных
@@ -73,7 +73,7 @@ public class ExerciseTwo extends BaseSeleniumTest {
 
         SleepUtils.sleep(2000);
         int emailsInSent = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(
-            "//div[@class='ReactVirtualized__Grid__innerScrollContainer']/a"))).size();
+            "//*[@class='ReactVirtualized__Grid__innerScrollContainer']/a"))).size();
         //System.out.println(emailsInSent);
 
         //нажимаем написать письмо
@@ -104,7 +104,7 @@ public class ExerciseTwo extends BaseSeleniumTest {
 
         SleepUtils.sleep(2000);
         int emailsInSent2 = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(
-            "//div[@class='ReactVirtualized__Grid__innerScrollContainer']/a"))).size();
+            "//*[@class='ReactVirtualized__Grid__innerScrollContainer']/a"))).size();
         Assertions.assertThat(emailsInSent < emailsInSent2).isTrue();
 
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
@@ -115,7 +115,7 @@ public class ExerciseTwo extends BaseSeleniumTest {
 
         SleepUtils.sleep(2000);
         int emailsInTest2 = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(
-            "//div[@class='ReactVirtualized__Grid__innerScrollContainer']/a"))).size();
+            "//*[@class='ReactVirtualized__Grid__innerScrollContainer']/a"))).size();
         Assertions.assertThat(emailsInTest < emailsInTest2).isTrue();
 
         //открываем письмо в папке тест
