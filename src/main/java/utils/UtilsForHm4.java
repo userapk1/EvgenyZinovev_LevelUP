@@ -1,14 +1,12 @@
 package utils;
 
+import java.time.Duration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.time.Duration;
-import java.util.Properties;
 
 public class UtilsForHm4 {
 
@@ -22,6 +20,7 @@ public class UtilsForHm4 {
     public UtilsForHm4(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        PageFactory.initElements(driver, this);
     }
 
     public void switchToFrame() {
@@ -34,6 +33,10 @@ public class UtilsForHm4 {
         var currentHandle = driver.getWindowHandle();
         driver.switchTo().window(currentHandle);
     }
+
+    /*protected Integer getElement(final WebElement element) {
+        return wait.until(ExpectedConditions.visibilityOf(element)).getSize();
+    }*/
 
 
 
