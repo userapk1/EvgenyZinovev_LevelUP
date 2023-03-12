@@ -77,7 +77,7 @@ public  class ExerciseOne extends BaseSeleniumTest {
             "//div[contains(@class, 'application-mail__layout')]//a[contains(@title, 'Отправленные')]"))).click();
 
         int emailsInSent = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(
-            "//*[@href = '/sent/?']"))).size();
+            "//*[@class='ReactVirtualized__Grid__innerScrollContainer']/a"))).size();
         System.out.println(emailsInSent);
 
         //cмотрим скока записей в черновиках
@@ -87,7 +87,7 @@ public  class ExerciseOne extends BaseSeleniumTest {
         SleepUtils.sleep(2000);
         int emailsInDrafts;
         emailsInDrafts = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(
-            "//div[contains(@class, 'ReactVirtualized__Grid')]/div[contains(@class, 'ReactVirtualized__Grid')]/a")))
+            "//*[@class='ReactVirtualized__Grid__innerScrollContainer']/a")))
                                  .size();
         //System.out.println(emailsInDrafts);
 
@@ -118,7 +118,7 @@ public  class ExerciseOne extends BaseSeleniumTest {
 
         SleepUtils.sleep(2000);
         int emailsInDrafts2 = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(
-            "//div[contains(@class, 'ReactVirtualized__Grid')]/div[contains(@class, 'ReactVirtualized__Grid')]/a")))
+            "//*[@class='ReactVirtualized__Grid__innerScrollContainer']/a")))
                                   .size();
         //System.out.println(emailsInDrafts2);
         //проверяем што черновик сохранен
@@ -155,7 +155,7 @@ public  class ExerciseOne extends BaseSeleniumTest {
 
         //8.ПРОВНРЯЕМ Verify, что письмо исчезло из черновиков
         int emailsInDrafts3 = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(
-            "//div[contains(@class, 'ReactVirtualized__Grid')]/div[contains(@class, 'ReactVirtualized__Grid')]/a")))
+            "//*[@class='ReactVirtualized__Grid__innerScrollContainer']/a")))
                                   .size();
         Assertions.assertThat(emailsInDrafts2 > emailsInDrafts3).isTrue();
 
@@ -165,7 +165,7 @@ public  class ExerciseOne extends BaseSeleniumTest {
 
         SleepUtils.sleep(2000);
         int emailsInSent2 = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(
-            "//div[@class='ReactVirtualized__Grid__innerScrollContainer']/a"))).size();
+            "//*[@class='ReactVirtualized__Grid__innerScrollContainer']/a"))).size();
         System.out.println(emailsInSent2);
         Assertions.assertThat(emailsInSent < emailsInSent2).isTrue();
 

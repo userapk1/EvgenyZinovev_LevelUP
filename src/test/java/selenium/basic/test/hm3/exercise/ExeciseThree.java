@@ -63,7 +63,7 @@ public class ExeciseThree extends BaseSeleniumTest {
         SleepUtils.sleep(2000);
         int emailsInIncoming;
         emailsInIncoming = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(
-            "//div[@class='ReactVirtualized__Grid__innerScrollContainer']/a"))).size();
+            "//*[@class='ReactVirtualized__Grid__innerScrollContainer']/a"))).size();
 
         //check garbage
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
@@ -72,7 +72,7 @@ public class ExeciseThree extends BaseSeleniumTest {
         SleepUtils.sleep(2000);
         int emailsInGarbage;
         emailsInGarbage = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(
-            "//div[@class='ReactVirtualized__Grid__innerScrollContainer']/a"))).size();
+            "//*[@class='ReactVirtualized__Grid__innerScrollContainer']/a"))).size();
 
         //нажимаем написать письмо
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
@@ -109,7 +109,7 @@ public class ExeciseThree extends BaseSeleniumTest {
 
         SleepUtils.sleep(2000);
         int emailsInIncoming2 = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(
-            "//div[@class='ReactVirtualized__Grid__innerScrollContainer']/a"))).size();
+            "//*[@class='ReactVirtualized__Grid__innerScrollContainer']/a"))).size();
         Assertions.assertThat(emailsInIncoming < emailsInIncoming2).isTrue();
 
         //открываем письмо в папке вх себе
@@ -148,7 +148,7 @@ public class ExeciseThree extends BaseSeleniumTest {
 
         SleepUtils.sleep(2000);
         int emailsInGarbage2 = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(
-            "//div[@class='ReactVirtualized__Grid__innerScrollContainer']/a"))).size();
+            "//*[@class='ReactVirtualized__Grid__innerScrollContainer']/a"))).size();
         Assertions.assertThat(emailsInGarbage < emailsInGarbage2).isTrue();
 
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
