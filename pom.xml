@@ -16,9 +16,28 @@
         <checkstyle.version>10.3.3</checkstyle.version>
         <commons-io.version>2.11.0</commons-io.version>
         <commons-collections4.version>4.4</commons-collections4.version>
-
+        <junit-jupiter.version>5.9.2</junit-jupiter.version>
+        <junit-platform-suite-engine.version>1.9.2</junit-platform-suite-engine.version>
         <maven-checkstyle-plugin.version>3.2.0</maven-checkstyle-plugin.version>
+        <maven-surefire-plugin.version>3.0.0-M8</maven-surefire-plugin.version>
+        <junit-jupiter-engine.version>5.9.2</junit-jupiter-engine.version>
+        <selenium-java.version>4.8.1</selenium-java.version>
+        <assertj-core.version>3.24.2</assertj-core.version>
+        <javafaker.version>1.0.2</javafaker.version>
     </properties>
+
+    <profiles>
+    <profile>
+        <id>all-test-selenium</id>
+        <activation>
+            <activeByDefault>true</activeByDefault>
+        </activation>
+        <properties>
+            <suite.class>**/hm3/exercise/*.class</suite.class>
+        </properties>
+    </profile>
+
+    </profiles>
 
 
     <dependencies>
@@ -33,6 +52,41 @@
             <artifactId>commons-collections4</artifactId>
             <version>${commons-collections4.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junit-jupiter.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-suite-engine</artifactId>
+            <version>${junit-platform-suite-engine.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>${selenium-java.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertj-core.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.javafaker</groupId>
+            <artifactId>javafaker</artifactId>
+            <version>${javafaker.version}</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>
@@ -41,6 +95,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
                 <version>${maven-checkstyle-plugin.version}</version>
+
                 <dependencies>
                     <dependency>
                         <groupId>com.puppycrawl.tools</groupId>
@@ -48,6 +103,7 @@
                         <version>${checkstyle.version}</version>
                     </dependency>
                 </dependencies>
+
                 <configuration>
                     <configLocation>
                         <!--  pay attention to use exact url for checkstyle plugin ruleset  -->
@@ -69,6 +125,19 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>${maven-surefire-plugin.version}</version>
+            <configuration>
+              <includes>
+                      <include>${suite.class}</include>
+              </includes>
+            </configuration>
+            </plugin>
+
+
         </plugins>
     </build>
 
