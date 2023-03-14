@@ -4,34 +4,37 @@ import java.time.Duration;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import utils.UtilsForHm4;
 
-public class IndexPage {
+public class IndexPage extends UtilsForHm4{
 
     private final WebDriver driver;
     private final WebDriverWait wait;
 
-    /*@FindBy(xpath = "//div[contains(@class, 'layout__column_left')]//a[contains(@class,"
-        + " 'child-level_0')]//div[@class='nav__folder-name__txt']")*/
-    private List <WebElement> layoutColumnLeft;
+    private UtilsForHm4 utils;
 
-    @FindBy(xpath = "//div[contains(@class, 'application-mail__layout')]//a[contains(@title, 'Отправленные')]")
-    private WebElement sentButton;
+
+    /*@FindBy(xpath = "//div[contains(@class, 'layout__column_left')]//a[contains(@class,"
+            + " 'child-level_0')]//div[@class='nav__folder-name__txt']")*/
+    /*private List <WebElement> layoutColumnLeft;*/
 
     @FindBy(xpath = "//*[@href = '/sent/?']")
-    private  WebElement emailInSent;
+    private WebElement sentButtonInLayoutColumn;
+
+    @FindBy(xpath = "//*[@class='ReactVirtualized__Grid__innerScrollContainer']/a")
+    private List <WebElement> numberOfLetters;
 
     @FindBy(xpath = "//div[contains(@id, 'sideBarContent')]//a[@title= 'Черновики']")
-    private  WebElement draftsButton;
+    private  WebElement draftsButtonInLayoutColumn;
 
-    @FindBy(xpath = "//div[contains(@class, 'ReactVirtualized__Grid')]/div[contains(@class, 'ReactVirtualized__Grid')]/a")
-    private  WebElement emailInDrafts;
+    /*@FindBy(xpath = "//div[contains(@class, 'ReactVirtualized__Grid')]/div[contains(@class, 'ReactVirtualized__Grid')]/a")
+    private  WebElement emailInDrafts;*/
 
     @FindBy(xpath = "//*[@class='ico ico_16-compose ico_size_s']")
     private  WebElement writeALetterButton;
@@ -49,12 +52,49 @@ public class IndexPage {
     private WebElement saveButton;
 
     @FindBy(xpath = "//div[contains(@class, 'compose-app_fix')]//button[@tabindex = '700']")
-    private WebElement closeFrameButton;
+    private WebElement closeFrameButton1;
+    @FindBy(xpath = "//a[contains(@class,'llc llc_normal llc_first')]//div[contains(@title, 'Сегодня')]")
+    private WebElement lastLetter;
+    ////div[@class='layout__main-frame']//a[contains(@class,'llc llc_normal llc_first')]
+
+    @FindBy(xpath = "//div[contains(@class, 'head_container')]//span[contains(@class, 'text')]")
+    private WebElement toFieldInside;
+    @FindBy(xpath = "//div[contains(@class, 'letter__author')//span[@class='letter-contact']")
+    private WebElement toFieldInsideInPackageTest;
+
+    @FindBy(xpath = "//div[contains(@class, 'thread__subject-line')]/h2[@class='thread-subject']")
+    private WebElement subjectFieldInsideInPackageTest;
+
+    @FindBy(xpath = "//div[contains(@class, 'subject__container')]//input[contains(@class, 'container')]")
+    private WebElement subjectFieldInside;
+
+    @FindBy(xpath = "//div[contains(@class, 'js-helper')]/div/div/div/div[1]")
+    private WebElement bodyFieldInside;
+
+    @FindBy(xpath = "//div[contains(@class, 'footer')]//button[contains(@data-test-id, 'send')]")
+    private WebElement sentButtonInOpenLetter;
+
+    @FindBy(xpath = "//div[contains(@class, 'layer layer')]//span[@class='button2__wrapper button2__wrapper_centered']")
+    private WebElement closeFrameButton2;
+
+    @FindBy(xpath = "//div[contains(@class, 'ph-auth')]//div[contains(@class, 'ph-project__account')]")
+    private WebElement logoutButton1;
+
+    @FindBy(xpath = "//div[contains(@class, 'ph-item__hover-active')]/div[contains(@class, 'ph-text')]")
+    private WebElement logoutButton2;
+
+    @FindBy(xpath = "//div[contains(@class, 'sidebar__header')]//span[@class='sidebar__menu-ico']")
+    private WebElement leftSideMenu;
+
+    @FindBy(xpath = "//nav[contains(@class, 'nav nav_expanded nav_hover-support')]//a[contains(@title, 'Тест')]")
+    private WebElement testButtonInLayoutColumn;
 
 
     public IndexPage(final WebDriver driver) {
+        super(driver);
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        this.utils = new UtilsForHm4(driver);
         PageFactory.initElements(driver, this);
     }
 
@@ -64,60 +104,31 @@ public class IndexPage {
                          + " 'child-level_0')]//div[@class='nav__folder-name__txt']"), 3))
                    .stream().map(WebElement::getText).collect(Collectors.toList()).size();
     }
-    /*public int getLayoutColumnLeft() {
-        return wait.until(ExpectedConditions.visibilityOfAllElements(layoutColumnLeft))
-                   .stream().map(WebElement::getText).collect(Collectors.toList()).size();
-    }*/
-
-    //пример
-  /*  public List<WebElement> IndexPageColumnLeftNumber() {
-        return wait.until(ExpectedConditions
-            .numberOfElementsToBeMoreThan(By.xpath("//div[contains(@class, 'layout__column_left')]//a[contains(@class,"
-                + " 'child-level_0')]//div[@class='nav__folder-name__txt']"), 3));
-    }*/
-
     //переход в отправленные
-    public void clickSentButton() {
-        wait.until(ExpectedConditions.elementToBeClickable(sentButton)).click();
-    }
-
-    public Integer getEmailInSent() {
-       return wait.until(ExpectedConditions.visibilityOfAllElements(emailInSent)).size();
-    }
-
-    public void clickDraftsButton() {
-        wait.until(ExpectedConditions.elementToBeClickable(draftsButton)).click();
-    }
-
-    public Dimension getEmailInDrafts() {
-        return wait.until(ExpectedConditions.visibilityOf(emailInDrafts)).getSize();
-    }
-
-    public void clickWriteALetterButton() {
-        wait.until(ExpectedConditions.elementToBeClickable(writeALetterButton)).click();
-    }
-
+    public void clickSentButtonInLayoutColumn() {click(sentButtonInLayoutColumn);}
+    public Integer getEmailInSent() {return  amountOfElements(numberOfLetters);}
+    public void clickDraftsButtonInLayoutColumn() {click(draftsButtonInLayoutColumn);}
+    public Integer getEmailInDrafts() {return amountOfElements(numberOfLetters);}
+    public Integer getEmailInTests() {return amountOfElements(numberOfLetters);}
+    public void clickWriteALetterButton() {click(writeALetterButton);}
     //заполняем поле кому
-    public void fillToField(final String destination) {
-        wait.until(ExpectedConditions.visibilityOf(toField)).sendKeys(destination);
-    }
-
-    public void fillSubjectField(final String subject) {
-        wait.until(ExpectedConditions.visibilityOf(subjectField)).sendKeys(subject);
-    }
-
-    public void fillBodyField(final String body) {
-        wait.until(ExpectedConditions.visibilityOf(bodyField)).sendKeys(body);
-    }
-
-    public void clickSaveButton() {
-        wait.until(ExpectedConditions.elementToBeClickable(saveButton)).click();
-    }
-
-    public void clickCloseFrameButton() {
-        wait.until(ExpectedConditions.elementToBeClickable(closeFrameButton)).click();
-    }
-
+    public void fillToField(final String destination) {sendKeys(toField, destination);}
+    public void fillSubjectField(final String subject) {sendKeys(subjectField, subject);}
+    public void fillBodyField(final String body) {sendKeys(bodyField, body);}
+    public void clickSaveButton() {click(saveButton);}
+    public void clickCloseFrameButton() {click(closeFrameButton1);}
+    public void clickLastLetter() {click(lastLetter);}
+    public String getToFieldInside() {return getText(toFieldInside);}
+    public String getSubjectFieldInside() {return getAttribute(subjectFieldInside, "value");}
+    public String getBodyFieldInside() {return getText(bodyFieldInside);}
+    public void clickSendButtonInOpenLetter() {click(sentButtonInOpenLetter);}
+    public void clickCloseFrameButton2() {click(closeFrameButton2);}
+    public void clickLogoutButton1() {click(logoutButton1);}
+    public void clickLogoutButton2() {click(logoutButton2);}
+    public void clickLeftSideMenu() {click(leftSideMenu);}
+    public void clickTestButtonInLayoutColumn() {click(testButtonInLayoutColumn);}
+    public String getSubjectFieldInsideInPackageTest() {return getAttribute(subjectFieldInsideInPackageTest, "title");}
+    public String getToFieldInsideInPackageTest() {return getText(toFieldInsideInPackageTest);}
 
 
 }

@@ -11,12 +11,11 @@ import selenium.page.object.hm4.LoginRegistrationPage;
 import utils.SleepUtils;
 import utils.UtilsForHm4;
 
-public class ExerciseOneInPOTest extends BaseSeleniumTest {
+public class ExerciseTwoInPOTest extends BaseSeleniumTest {
 
-   private LoginRegistrationPage loginRegistrationPage;
-   private IndexPage indexPage;
-   private UtilsForHm4 utils;
-
+    private LoginRegistrationPage loginRegistrationPage;
+    private IndexPage indexPage;
+    private UtilsForHm4 utils;
 
     @Override
     @BeforeEach
@@ -30,7 +29,7 @@ public class ExerciseOneInPOTest extends BaseSeleniumTest {
 
     @Test
     @AllSeleniumOneTag
-    void loginCreateSaveToDraftSend() {
+    void loginCreateSendYourself() {
 
         //этап открытия IndexPage
         loginRegistrationPage.open();
@@ -44,48 +43,42 @@ public class ExerciseOneInPOTest extends BaseSeleniumTest {
         SleepUtils.sleep(1000);
         utils.switchToCurrentPage();
 
-        //этап написания и сохранения письма
+        //этап написания и отправки письма себе (папка "тест")
         var num = indexPage.getLayoutColumnLeft();
         Assertions.assertThat(num).isEqualTo(7);
+        indexPage.clickLeftSideMenu();
+        indexPage.clickTestButtonInLayoutColumn();
         SleepUtils.sleep(1000);
+        var emailsBeforeSendingInTest = indexPage.getEmailInTests();
         indexPage.clickSentButtonInLayoutColumn();
         SleepUtils.sleep(1000);
         var emailsBeforeSendingInSent = indexPage.getEmailInSent();
-        indexPage.clickDraftsButtonInLayoutColumn();
-        SleepUtils.sleep(1000);
-        var emailsBeforeSaveInDrafts = indexPage.getEmailInDrafts();
         indexPage.clickWriteALetterButton();
-        indexPage.fillToField(destination);
-        indexPage.fillSubjectField(subject);
+        indexPage.fillToField(letterForMe);
+        indexPage.fillSubjectField(subjectForMe);
         indexPage.fillBodyField(bodyLetter);
-        indexPage.clickSaveButton();
-        indexPage.clickCloseFrameButton();
-        SleepUtils.sleep(1000);
-        var emailsAfterSaveInDrafts = indexPage.getEmailInDrafts();
-        System.out.println(emailsBeforeSaveInDrafts);
-        System.out.println(emailsAfterSaveInDrafts);
-        Assertions.assertThat(emailsBeforeSaveInDrafts < emailsAfterSaveInDrafts).isTrue();
-
-        //этап отправки письма
-        indexPage.clickLastLetter();
-        var checkFieldTo = indexPage.getToFieldInside();
-        Assertions.assertThat(destination).isEqualTo(checkFieldTo);
-        var checkFieldSubject = indexPage.getSubjectFieldInside();
-        Assertions.assertThat(subject).isEqualTo(checkFieldSubject);
-        SleepUtils.sleep(1000);
-        var checkFieldBody = indexPage.getBodyFieldInside();
-        Assertions.assertThat(bodyLetter).isEqualTo(checkFieldBody);
-        SleepUtils.sleep(1000);
         indexPage.clickSendButtonInOpenLetter();
         indexPage.clickCloseFrameButton2();
         SleepUtils.sleep(1000);
-        var emailsAfterSendingInDrafts = indexPage.getEmailInDrafts();
-        Assertions.assertThat(emailsAfterSaveInDrafts > emailsAfterSendingInDrafts).isTrue();
-        indexPage.clickSentButtonInLayoutColumn();
-        SleepUtils.sleep(1000);
         var emailsAfterSendingInSent = indexPage.getEmailInSent();
         Assertions.assertThat(emailsBeforeSendingInSent < emailsAfterSendingInSent).isTrue();
+        indexPage.clickLeftSideMenu();
+        indexPage.clickTestButtonInLayoutColumn();
+        SleepUtils.sleep(1000);
+        var emailsAfterSendingInTest = indexPage.getEmailInTests();
+        Assertions.assertThat(emailsBeforeSendingInTest < emailsAfterSendingInTest).isTrue();
+        indexPage.clickLastLetter();
+        SleepUtils.sleep(1000);
+        var checkFieldTo = indexPage.getToFieldInsideInPackageTest();
+        Assertions.assertThat(letterForMe).isEqualTo(checkFieldTo);
+        SleepUtils.sleep(1000);
+        var checkFieldSubject = indexPage.getSubjectFieldInsideInPackageTest();
+        Assertions.assertThat(subjectForMe).isEqualTo(checkFieldSubject);
+        SleepUtils.sleep(1000);
+        var checkFieldBody = indexPage.getBodyFieldInside();
+        Assertions.assertThat(bodyLetter).isEqualTo(checkFieldBody);
         indexPage.clickLogoutButton1();
         indexPage.clickLogoutButton2();
+
     }
 }
