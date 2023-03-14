@@ -70,12 +70,12 @@ public class ExerciseTwoInPOTest extends BaseSeleniumTest {
         indexPage.clickLastLetter();
         SleepUtils.sleep(1000);
         var checkFieldTo = indexPage.getToFieldInsideInPackageTest();
-        Assertions.assertThat(letterForMe).isEqualTo(checkFieldTo);
+        Assertions.assertThat(checkFieldTo).contains(letterForMe);
         SleepUtils.sleep(1000);
         var checkFieldSubject = indexPage.getSubjectFieldInsideInPackageTest();
         Assertions.assertThat(subjectForMe).isEqualTo(checkFieldSubject);
         SleepUtils.sleep(1000);
-        var checkFieldBody = indexPage.getBodyFieldInside();
+        var checkFieldBody = indexPage.getBodyFieldInsideInPackageTest();
         Assertions.assertThat(checkFieldBody).contains(bodyLetter);
         indexPage.clickLogoutButton1();
         indexPage.clickLogoutButton2();

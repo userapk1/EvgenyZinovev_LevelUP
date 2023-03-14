@@ -59,11 +59,15 @@ public class IndexPage extends UtilsForHm4{
 
     @FindBy(xpath = "//div[contains(@class, 'head_container')]//span[contains(@class, 'text')]")
     private WebElement toFieldInside;
-    @FindBy(xpath = "//div[contains(@class, 'letter__author')//span[@class='letter-contact']")
+    @FindBy(xpath = "//div[contains(@class, 'letter__author')]//span[@class='letter-contact']")
     private WebElement toFieldInsideInPackageTest;
+    //div[contains(@class, 'letter__author')]//span[@class='letter-contact']
 
     @FindBy(xpath = "//div[contains(@class, 'thread__subject-line')]/h2[@class='thread-subject']")
     private WebElement subjectFieldInsideInPackageTest;
+
+    @FindBy(xpath = "//div[@class = 'letter-body__body-wrapper']")
+    private WebElement bodyFieldInsideInPackageTest;
 
     @FindBy(xpath = "//div[contains(@class, 'subject__container')]//input[contains(@class, 'container')]")
     private WebElement subjectFieldInside;
@@ -106,7 +110,7 @@ public class IndexPage extends UtilsForHm4{
     }
     //переход в отправленные
     public void clickSentButtonInLayoutColumn() {click(sentButtonInLayoutColumn);}
-    public Integer getEmailInSent() {return  amountOfElements(numberOfLetters);}
+    public Integer getEmailInSent() {return amountOfElements(numberOfLetters);}
     public void clickDraftsButtonInLayoutColumn() {click(draftsButtonInLayoutColumn);}
     public Integer getEmailInDrafts() {return amountOfElements(numberOfLetters);}
     public Integer getEmailInTests() {return amountOfElements(numberOfLetters);}
@@ -127,8 +131,9 @@ public class IndexPage extends UtilsForHm4{
     public void clickLogoutButton2() {click(logoutButton2);}
     public void clickLeftSideMenu() {click(leftSideMenu);}
     public void clickTestButtonInLayoutColumn() {click(testButtonInLayoutColumn);}
-    public String getSubjectFieldInsideInPackageTest() {return getAttribute(subjectFieldInsideInPackageTest, "title");}
-    public String getToFieldInsideInPackageTest() {return getText(toFieldInsideInPackageTest);}
+    public String getSubjectFieldInsideInPackageTest() {return getText(subjectFieldInsideInPackageTest);}
+    public String getToFieldInsideInPackageTest() {return getAttribute(toFieldInsideInPackageTest, "title");}
 
+    public String getBodyFieldInsideInPackageTest() {return getText(bodyFieldInsideInPackageTest);}
 
 }
