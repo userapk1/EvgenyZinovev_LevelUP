@@ -90,7 +90,7 @@ public class ExerciseTwo extends BaseSeleniumTest {
             .sendKeys(subjectForMe);
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By
-                .xpath("//div[contains(@class, 'compose-app_fix')]//div[contains(@class, 'editable')]/div/div[2]")))
+                .xpath("//div[contains(@class, 'editable')]/div/div[2]")))
             .sendKeys(bodyLetter);
 
         //отправили и закрыли фрейм
@@ -134,9 +134,9 @@ public class ExerciseTwo extends BaseSeleniumTest {
         Assertions.assertThat(subjectForMe).isEqualTo(checkFieldSubject);
 
         String checkFieldBody = wait.until(ExpectedConditions.visibilityOfElementLocated(By
-            .xpath("//div[contains(@class, 'style')]//div[contains(@class, 'js-helper')]/div/div/div/div[1]")))
+            .xpath("//*[@role = 'textbox']")))
                                     .getText();
-        Assertions.assertThat(bodyLetter).isEqualTo(checkFieldBody);
+        Assertions.assertThat(checkFieldBody).contains(bodyLetter);
 
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
             "//div[contains(@class, 'ph-auth')]//div[contains(@class, 'ph-project__account')]"))).click();

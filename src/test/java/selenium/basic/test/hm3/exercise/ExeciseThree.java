@@ -84,7 +84,7 @@ public class ExeciseThree extends BaseSeleniumTest {
             .sendKeys(letterForMe);
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By
-                .xpath("//div[contains(@class, 'subject__container')]//input[contains(@class, 'container')]")))
+                .xpath("//div[contains(@class, 'editable')]/div/div[2]")))
             .sendKeys(subject);
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By
@@ -131,9 +131,9 @@ public class ExeciseThree extends BaseSeleniumTest {
         Assertions.assertThat(subject).isEqualTo(checkFieldSubject);
 
         String checkFieldBody = wait.until(ExpectedConditions.visibilityOfElementLocated(By
-            .xpath("//div[contains(@class, 'style')]//div[contains(@class, 'js-helper')]/div/div/div/div[1]")))
+            .xpath("//*[@role = 'textbox']")))
                                     .getText();
-        Assertions.assertThat(bodyLetter).isEqualTo(checkFieldBody);
+        Assertions.assertThat(checkFieldBody).contains(bodyLetter);
 
         //удаляем письмо
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(

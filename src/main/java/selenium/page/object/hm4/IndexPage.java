@@ -45,7 +45,7 @@ public class IndexPage extends UtilsForHm4{
     @FindBy(xpath = "//div[contains(@class, 'subject__container')]//input[contains(@class, 'container')]")
     private WebElement subjectField;
 
-    @FindBy(xpath = "//div[contains(@class, 'compose-app_fix')]//div[contains(@class, 'editable')]/div/div[2]")
+    @FindBy(xpath = "//div[contains(@class, 'editable')]/div/div[2]")
     private WebElement bodyField;
 
     @FindBy(xpath = "//div[contains(@class, 'footer')]//button[contains(@data-test-id, 'save')]")
@@ -68,7 +68,7 @@ public class IndexPage extends UtilsForHm4{
     @FindBy(xpath = "//div[contains(@class, 'subject__container')]//input[contains(@class, 'container')]")
     private WebElement subjectFieldInside;
 
-    @FindBy(xpath = "//div[contains(@class, 'js-helper')]/div/div/div/div[1]")
+    @FindBy(xpath = "//*[@role = 'textbox']")
     private WebElement bodyFieldInside;
 
     @FindBy(xpath = "//div[contains(@class, 'footer')]//button[contains(@data-test-id, 'send')]")

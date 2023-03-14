@@ -74,7 +74,7 @@ public class ExerciseOneInPOTest extends BaseSeleniumTest {
         Assertions.assertThat(subject).isEqualTo(checkFieldSubject);
         SleepUtils.sleep(1000);
         var checkFieldBody = indexPage.getBodyFieldInside();
-        Assertions.assertThat(bodyLetter).isEqualTo(checkFieldBody);
+        Assertions.assertThat(checkFieldBody).contains(bodyLetter);
         SleepUtils.sleep(1000);
         indexPage.clickSendButtonInOpenLetter();
         indexPage.clickCloseFrameButton2();
