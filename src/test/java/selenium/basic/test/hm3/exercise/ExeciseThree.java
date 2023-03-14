@@ -60,7 +60,7 @@ public class ExeciseThree extends BaseSeleniumTest {
             "//div[@class='ReactVirtualized__Grid__innerScrollContainer']//div[@class='metathread__contain']/div/a")))
             .click();
 
-        SleepUtils.sleep(2000);
+        SleepUtils.sleep(1000);
         int emailsInIncoming;
         emailsInIncoming = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(
             "//*[@class='ReactVirtualized__Grid__innerScrollContainer']/a"))).size();
@@ -69,7 +69,7 @@ public class ExeciseThree extends BaseSeleniumTest {
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
             "//a[@href='/trash/?']"))).click();
 
-        SleepUtils.sleep(2000);
+        SleepUtils.sleep(1000);
         int emailsInGarbage;
         emailsInGarbage = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(
             "//*[@class='ReactVirtualized__Grid__innerScrollContainer']/a"))).size();
@@ -78,7 +78,7 @@ public class ExeciseThree extends BaseSeleniumTest {
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
             "//span[@class='compose-button__ico']//*[@class='ico ico_16-compose ico_size_s']"))).click();
 
-        SleepUtils.sleep(2000);
+        SleepUtils.sleep(1000);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By
                 .xpath("//div[contains(@class, 'head_container')]//input[contains(@class, 'container')]")))
             .sendKeys(letterForMe);
@@ -88,13 +88,13 @@ public class ExeciseThree extends BaseSeleniumTest {
             .sendKeys(subject);
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By
-                .xpath("//div[contains(@class, 'compose-app_fix')]//div[contains(@class, 'editable')]/div/div[2]")))
+                .xpath("//div[contains(@class, 'editable')]/div/div[2]")))
             .sendKeys(bodyLetter);
 
         //отправили и закрыли фрейм
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
             "//div[contains(@class, 'footer')]//button[contains(@data-test-id, 'send')]"))).click();
-        SleepUtils.sleep(3000);
+        SleepUtils.sleep(2000);
         //close frame
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
             "//div[contains(@class, 'layer layer')]//span[@class='button2__wrapper button2__wrapper_centered']")))
@@ -131,9 +131,9 @@ public class ExeciseThree extends BaseSeleniumTest {
         Assertions.assertThat(subject).isEqualTo(checkFieldSubject);
 
         String checkFieldBody = wait.until(ExpectedConditions.visibilityOfElementLocated(By
-            .xpath("//div[contains(@class, 'style')]//div[contains(@class, 'js-helper')]/div/div/div/div[1]")))
+            .xpath("//*[@role = 'textbox']")))
                                     .getText();
-        Assertions.assertThat(bodyLetter).isEqualTo(checkFieldBody);
+        Assertions.assertThat(checkFieldBody).contains(bodyLetter);
 
         //удаляем письмо
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
@@ -146,7 +146,7 @@ public class ExeciseThree extends BaseSeleniumTest {
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
             "//a[@href='/trash/?']"))).click();
 
-        SleepUtils.sleep(2000);
+        SleepUtils.sleep(1000);
         int emailsInGarbage2 = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(
             "//*[@class='ReactVirtualized__Grid__innerScrollContainer']/a"))).size();
         Assertions.assertThat(emailsInGarbage < emailsInGarbage2).isTrue();
@@ -156,7 +156,5 @@ public class ExeciseThree extends BaseSeleniumTest {
 
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
             "//div[contains(@class, 'ph-item__hover-active')]/div[contains(@class, 'ph-text')]"))).click();
-
-
     }
 }

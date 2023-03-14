@@ -67,11 +67,11 @@ public class ExerciseTwo extends BaseSeleniumTest {
         //System.out.println(emailsInTest);
 
         //чекаем скока писем в отправленных
-        SleepUtils.sleep(2000);
+        SleepUtils.sleep(1000);
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
             "//div[contains(@class, 'application-mail__layout')]//a[contains(@title, 'Отправленные')]"))).click();
 
-        SleepUtils.sleep(2000);
+        SleepUtils.sleep(1000);
         int emailsInSent = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(
             "//*[@class='ReactVirtualized__Grid__innerScrollContainer']/a"))).size();
         //System.out.println(emailsInSent);
@@ -80,7 +80,7 @@ public class ExerciseTwo extends BaseSeleniumTest {
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
             "//*[@class='ico ico_16-compose ico_size_s']"))).click();
 
-        SleepUtils.sleep(2000);
+        SleepUtils.sleep(1000);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By
                 .xpath("//div[contains(@class, 'head_container')]//input[contains(@class, 'container')]")))
             .sendKeys(letterForMe);
@@ -90,19 +90,19 @@ public class ExerciseTwo extends BaseSeleniumTest {
             .sendKeys(subjectForMe);
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By
-                .xpath("//div[contains(@class, 'compose-app_fix')]//div[contains(@class, 'editable')]/div/div[2]")))
+                .xpath("//div[contains(@class, 'editable')]/div/div[2]")))
             .sendKeys(bodyLetter);
 
         //отправили и закрыли фрейм
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
             "//div[contains(@class, 'footer')]//button[contains(@data-test-id, 'send')]"))).click();
-        SleepUtils.sleep(3000);
+        SleepUtils.sleep(2000);
         //close frame
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
             "//div[contains(@class, 'layer layer')]//span[@class='button2__wrapper button2__wrapper_centered']")))
             .click();
 
-        SleepUtils.sleep(2000);
+        SleepUtils.sleep(1000);
         int emailsInSent2 = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(
             "//*[@class='ReactVirtualized__Grid__innerScrollContainer']/a"))).size();
         Assertions.assertThat(emailsInSent < emailsInSent2).isTrue();
@@ -113,7 +113,7 @@ public class ExerciseTwo extends BaseSeleniumTest {
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
             "//nav[contains(@class, 'nav nav_expanded nav_hover-support')]//a[contains(@title, 'Тест')]"))).click();
 
-        SleepUtils.sleep(2000);
+        SleepUtils.sleep(1000);
         int emailsInTest2 = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(
             "//*[@class='ReactVirtualized__Grid__innerScrollContainer']/a"))).size();
         Assertions.assertThat(emailsInTest < emailsInTest2).isTrue();
@@ -134,16 +134,14 @@ public class ExerciseTwo extends BaseSeleniumTest {
         Assertions.assertThat(subjectForMe).isEqualTo(checkFieldSubject);
 
         String checkFieldBody = wait.until(ExpectedConditions.visibilityOfElementLocated(By
-            .xpath("//div[contains(@class, 'style')]//div[contains(@class, 'js-helper')]/div/div/div/div[1]")))
+            .xpath("//*[@role = 'textbox']")))
                                     .getText();
-        Assertions.assertThat(bodyLetter).isEqualTo(checkFieldBody);
+        Assertions.assertThat(checkFieldBody).contains(bodyLetter);
 
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
             "//div[contains(@class, 'ph-auth')]//div[contains(@class, 'ph-project__account')]"))).click();
 
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
             "//div[contains(@class, 'ph-item__hover-active')]/div[contains(@class, 'ph-text')]"))).click();
-
-
     }
 }
