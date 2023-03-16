@@ -27,6 +27,9 @@ public class IndexPage extends UtilsForHm4{
     @FindBy(xpath = "//*[@href = '/sent/?']")
     private WebElement sentButtonInLayoutColumn;
 
+    @FindBy(xpath = "//*[@href='/inbox/?']")
+    private WebElement incomingButtonInLayoutColumn;
+
     @FindBy(xpath = "//*[@class='ReactVirtualized__Grid__innerScrollContainer']/a")
     private List <WebElement> numberOfLetters;
 
@@ -52,16 +55,21 @@ public class IndexPage extends UtilsForHm4{
     private WebElement saveButton;
 
     @FindBy(xpath = "//div[contains(@class, 'compose-app_fix')]//button[@tabindex = '700']")
-    private WebElement closeFrameButton1;
+    private WebElement closeFrameButton;
+
+    @FindBy(xpath = "//div[contains(@class, 'portal-menu-element_back')]/span[@title='Вернуться']")
+    private WebElement closeFrameButtonAfterDeletedLetter;
     @FindBy(xpath = "//a[contains(@class,'llc llc_normal llc_first')]//div[contains(@title, 'Сегодня')]")
     private WebElement lastLetter;
     ////div[@class='layout__main-frame']//a[contains(@class,'llc llc_normal llc_first')]
+
+    @FindBy(xpath = "//a[contains(@class,'llc llc_normal llc_first')]")
+    private WebElement lastLetterInFolderToMyself;
 
     @FindBy(xpath = "//div[contains(@class, 'head_container')]//span[contains(@class, 'text')]")
     private WebElement toFieldInside;
     @FindBy(xpath = "//div[contains(@class, 'letter__author')]//span[@class='letter-contact']")
     private WebElement toFieldInsideInPackageTest;
-    //div[contains(@class, 'letter__author')]//span[@class='letter-contact']
 
     @FindBy(xpath = "//div[contains(@class, 'thread__subject-line')]/h2[@class='thread-subject']")
     private WebElement subjectFieldInsideInPackageTest;
@@ -78,6 +86,9 @@ public class IndexPage extends UtilsForHm4{
     @FindBy(xpath = "//div[contains(@class, 'footer')]//button[contains(@data-test-id, 'send')]")
     private WebElement sentButtonInOpenLetter;
 
+    @FindBy(xpath = "//div[@class='ReactVirtualized__Grid__innerScrollContainer']//div[@class='metathread__contain']/div/a")
+    private WebElement folderToMyselfLetter;
+
     @FindBy(xpath = "//div[contains(@class, 'layer layer')]//span[@class='button2__wrapper button2__wrapper_centered']")
     private WebElement closeFrameButton2;
 
@@ -92,6 +103,12 @@ public class IndexPage extends UtilsForHm4{
 
     @FindBy(xpath = "//nav[contains(@class, 'nav nav_expanded nav_hover-support')]//a[contains(@title, 'Тест')]")
     private WebElement testButtonInLayoutColumn;
+
+    @FindBy(xpath = "//a[@href='/trash/?']")
+    private WebElement garbageButton;
+
+    @FindBy(xpath = "//div[contains(@class, 'portal-menu-element_remove')]/span[@title='Удалить']")
+    private WebElement deleteButton;
 
 
     public IndexPage(final WebDriver driver) {
@@ -114,13 +131,16 @@ public class IndexPage extends UtilsForHm4{
     public void clickDraftsButtonInLayoutColumn() {click(draftsButtonInLayoutColumn);}
     public Integer getEmailInDrafts() {return amountOfElements(numberOfLetters);}
     public Integer getEmailInTests() {return amountOfElements(numberOfLetters);}
+    public Integer getEmailInToMyself() {return amountOfElements(numberOfLetters);}
+
+    public Integer getEmailInGarbage() {return amountOfElements(numberOfLetters);}
     public void clickWriteALetterButton() {click(writeALetterButton);}
     //заполняем поле кому
     public void fillToField(final String destination) {sendKeys(toField, destination);}
     public void fillSubjectField(final String subject) {sendKeys(subjectField, subject);}
     public void fillBodyField(final String body) {sendKeys(bodyField, body);}
     public void clickSaveButton() {click(saveButton);}
-    public void clickCloseFrameButton() {click(closeFrameButton1);}
+    public void clickCloseFrameButton() {click(closeFrameButton);}
     public void clickLastLetter() {click(lastLetter);}
     public String getToFieldInside() {return getText(toFieldInside);}
     public String getSubjectFieldInside() {return getAttribute(subjectFieldInside, "value");}
@@ -133,7 +153,12 @@ public class IndexPage extends UtilsForHm4{
     public void clickTestButtonInLayoutColumn() {click(testButtonInLayoutColumn);}
     public String getSubjectFieldInsideInPackageTest() {return getText(subjectFieldInsideInPackageTest);}
     public String getToFieldInsideInPackageTest() {return getAttribute(toFieldInsideInPackageTest, "title");}
-
     public String getBodyFieldInsideInPackageTest() {return getText(bodyFieldInsideInPackageTest);}
+    public void clickFolderToMyselfLetter() {click(folderToMyselfLetter);}
+    public void clickGarbageButton() {click(garbageButton);}
+    public void clickIncomingButtonInLayoutColumn() {click(incomingButtonInLayoutColumn);}
+    public void clickLastLetterInFolderToMyself() {click(lastLetterInFolderToMyself);}
+    public void clickDeleteButton() {click(deleteButton);}
+    public void clickCloseFrameButtonAfterDeletedLetter() {click(closeFrameButtonAfterDeletedLetter);}
 
 }

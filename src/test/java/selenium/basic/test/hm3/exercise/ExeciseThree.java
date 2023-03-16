@@ -117,7 +117,7 @@ public class ExeciseThree extends BaseSeleniumTest {
             "//div[@class='layout__main-frame']//div[@class='metathread__contain']//a"))).click();*/
 
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-            "//div[@class='ReactVirtualized__Grid__innerScrollContainer']/a[1]"))).click();
+            "//a[contains(@class,'llc llc_normal llc_first')]"))).click();
 
         //проверяяем соответствие полей
         String checkFieldTo = wait.until(ExpectedConditions.visibilityOfElementLocated(By
