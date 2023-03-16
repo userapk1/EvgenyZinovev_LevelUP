@@ -62,7 +62,7 @@ public class ExerciseTwo extends BaseSeleniumTest {
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
             "//nav[contains(@class, 'nav nav_expanded nav_hover-support')]//a[contains(@title, 'Тест')]"))).click();
 
-        int emailsInTest = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(
+        final int emailsInTest = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(
             "//*[@class='ReactVirtualized__Grid__innerScrollContainer']/a"))).size();
         //System.out.println(emailsInTest);
 
@@ -72,7 +72,7 @@ public class ExerciseTwo extends BaseSeleniumTest {
             "//div[contains(@class, 'application-mail__layout')]//a[contains(@title, 'Отправленные')]"))).click();
 
         SleepUtils.sleep(2000);
-        int emailsInSent = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(
+        final int emailsInSent = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(
             "//*[@class='ReactVirtualized__Grid__innerScrollContainer']/a"))).size();
         //System.out.println(emailsInSent);
 

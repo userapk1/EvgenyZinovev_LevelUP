@@ -12,7 +12,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.UtilsForHm4;
 
-public class IndexPage extends UtilsForHm4{
+public class IndexPage extends UtilsForHm4 {
 
     private final WebDriver driver;
     private final WebDriverWait wait;
@@ -31,12 +31,13 @@ public class IndexPage extends UtilsForHm4{
     private WebElement incomingButtonInLayoutColumn;
 
     @FindBy(xpath = "//*[@class='ReactVirtualized__Grid__innerScrollContainer']/a")
-    private List <WebElement> numberOfLetters;
+    private List<WebElement> numberOfLetters;
 
     @FindBy(xpath = "//div[contains(@id, 'sideBarContent')]//a[@title= 'Черновики']")
     private  WebElement draftsButtonInLayoutColumn;
 
-    /*@FindBy(xpath = "//div[contains(@class, 'ReactVirtualized__Grid')]/div[contains(@class, 'ReactVirtualized__Grid')]/a")
+    /*@FindBy(xpath = "//div[contains(@class, 'ReactVirtualized__Grid')]
+    /div[contains(@class, 'ReactVirtualized__Grid')]/a")
     private  WebElement emailInDrafts;*/
 
     @FindBy(xpath = "//*[@class='ico ico_16-compose ico_size_s']")
@@ -86,7 +87,8 @@ public class IndexPage extends UtilsForHm4{
     @FindBy(xpath = "//div[contains(@class, 'footer')]//button[contains(@data-test-id, 'send')]")
     private WebElement sentButtonInOpenLetter;
 
-    @FindBy(xpath = "//div[@class='ReactVirtualized__Grid__innerScrollContainer']//div[@class='metathread__contain']/div/a")
+    @FindBy(xpath = "//div[@class='ReactVirtualized__Grid__innerScrollContainer']"
+        + "//div[@class='metathread__contain']/div/a")
     private WebElement folderToMyselfLetter;
 
     @FindBy(xpath = "//div[contains(@class, 'layer layer')]//span[@class='button2__wrapper button2__wrapper_centered']")
@@ -125,40 +127,135 @@ public class IndexPage extends UtilsForHm4{
                          + " 'child-level_0')]//div[@class='nav__folder-name__txt']"), 3))
                    .stream().map(WebElement::getText).collect(Collectors.toList()).size();
     }
-    //переход в отправленные
-    public void clickSentButtonInLayoutColumn() {click(sentButtonInLayoutColumn);}
-    public Integer getEmailInSent() {return amountOfElements(numberOfLetters);}
-    public void clickDraftsButtonInLayoutColumn() {click(draftsButtonInLayoutColumn);}
-    public Integer getEmailInDrafts() {return amountOfElements(numberOfLetters);}
-    public Integer getEmailInTests() {return amountOfElements(numberOfLetters);}
-    public Integer getEmailInToMyself() {return amountOfElements(numberOfLetters);}
 
-    public Integer getEmailInGarbage() {return amountOfElements(numberOfLetters);}
-    public void clickWriteALetterButton() {click(writeALetterButton);}
+    //переход в отправленные
+    public void clickSentButtonInLayoutColumn() {
+        click(sentButtonInLayoutColumn);
+    }
+
+    public Integer getEmailInSent() {
+        return amountOfElements(numberOfLetters);
+    }
+
+    public void clickDraftsButtonInLayoutColumn() {
+        click(draftsButtonInLayoutColumn);
+    }
+
+    public Integer getEmailInDrafts() {
+        return amountOfElements(numberOfLetters);
+    }
+
+    public Integer getEmailInTests() {
+        return amountOfElements(numberOfLetters);
+    }
+
+    public Integer getEmailInToMyself() {
+        return amountOfElements(numberOfLetters);
+    }
+
+    public Integer getEmailInGarbage() {
+        return amountOfElements(numberOfLetters);
+    }
+
+    public void clickWriteALetterButton() {
+        click(writeALetterButton);
+    }
     //заполняем поле кому
-    public void fillToField(final String destination) {sendKeys(toField, destination);}
-    public void fillSubjectField(final String subject) {sendKeys(subjectField, subject);}
-    public void fillBodyField(final String body) {sendKeys(bodyField, body);}
-    public void clickSaveButton() {click(saveButton);}
-    public void clickCloseFrameButton() {click(closeFrameButton);}
-    public void clickLastLetter() {click(lastLetter);}
-    public String getToFieldInside() {return getText(toFieldInside);}
-    public String getSubjectFieldInside() {return getAttribute(subjectFieldInside, "value");}
-    public String getBodyFieldInside() {return getText(bodyFieldInside);}
-    public void clickSendButtonInOpenLetter() {click(sentButtonInOpenLetter);}
-    public void clickCloseFrameButton2() {click(closeFrameButton2);}
-    public void clickLogoutButton1() {click(logoutButton1);}
-    public void clickLogoutButton2() {click(logoutButton2);}
-    public void clickLeftSideMenu() {click(leftSideMenu);}
-    public void clickTestButtonInLayoutColumn() {click(testButtonInLayoutColumn);}
-    public String getSubjectFieldInsideInPackageTest() {return getText(subjectFieldInsideInPackageTest);}
-    public String getToFieldInsideInPackageTest() {return getAttribute(toFieldInsideInPackageTest, "title");}
-    public String getBodyFieldInsideInPackageTest() {return getText(bodyFieldInsideInPackageTest);}
-    public void clickFolderToMyselfLetter() {click(folderToMyselfLetter);}
-    public void clickGarbageButton() {click(garbageButton);}
-    public void clickIncomingButtonInLayoutColumn() {click(incomingButtonInLayoutColumn);}
-    public void clickLastLetterInFolderToMyself() {click(lastLetterInFolderToMyself);}
-    public void clickDeleteButton() {click(deleteButton);}
-    public void clickCloseFrameButtonAfterDeletedLetter() {click(closeFrameButtonAfterDeletedLetter);}
+
+    public void fillToField(final String destination) {
+        sendKeys(toField, destination);
+    }
+
+    public void fillSubjectField(final String subject) {
+        sendKeys(subjectField, subject);
+    }
+
+    public void fillBodyField(final String body) {
+        sendKeys(bodyField, body);
+    }
+
+    public void clickSaveButton() {
+        click(saveButton);
+    }
+
+    public void clickCloseFrameButton() {
+        click(closeFrameButton);
+    }
+
+    public void clickLastLetter() {
+        click(lastLetter);
+    }
+
+    public String getToFieldInside() {
+        return getText(toFieldInside);
+    }
+
+    public String getSubjectFieldInside() {
+        return getAttribute(subjectFieldInside, "value");
+    }
+
+    public String getBodyFieldInside() {
+        return getText(bodyFieldInside);
+    }
+
+    public void clickSendButtonInOpenLetter() {
+        click(sentButtonInOpenLetter);
+    }
+
+    public void clickCloseFrameButton2() {
+        click(closeFrameButton2);
+    }
+
+    public void clickLogoutButton1() {
+        click(logoutButton1);
+    }
+
+    public void clickLogoutButton2() {
+        click(logoutButton2);
+    }
+
+    public void clickLeftSideMenu() {
+        click(leftSideMenu);
+    }
+
+    public void clickTestButtonInLayoutColumn() {
+        click(testButtonInLayoutColumn);
+    }
+
+    public String getSubjectFieldInsideInPackageTest() {
+        return getText(subjectFieldInsideInPackageTest);
+    }
+
+    public String getToFieldInsideInPackageTest() {
+        return getAttribute(toFieldInsideInPackageTest, "title");
+    }
+
+    public String getBodyFieldInsideInPackageTest() {
+        return getText(bodyFieldInsideInPackageTest);
+    }
+
+    public void clickFolderToMyselfLetter() {
+        click(folderToMyselfLetter);
+    }
+
+    public void clickGarbageButton() {
+        click(garbageButton);
+    }
+
+    public void clickIncomingButtonInLayoutColumn() {
+        click(incomingButtonInLayoutColumn);
+    }
+
+    public void clickLastLetterInFolderToMyself() {
+        click(lastLetterInFolderToMyself);
+    }
+
+    public void clickDeleteButton() {
+        click(deleteButton);
+    }
+
+    public void clickCloseFrameButtonAfterDeletedLetter() {
+        click(closeFrameButtonAfterDeletedLetter);
+    }
 
 }

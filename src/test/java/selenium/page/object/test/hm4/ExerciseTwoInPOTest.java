@@ -49,10 +49,10 @@ public class ExerciseTwoInPOTest extends BaseSeleniumTest {
         indexPage.clickLeftSideMenu();
         indexPage.clickTestButtonInLayoutColumn();
         SleepUtils.sleep(1000);
-        var emailsBeforeSendingInTest = indexPage.getEmailInTests();
+        final var emailsBeforeSendingInTest = indexPage.getEmailInTests();
         indexPage.clickSentButtonInLayoutColumn();
         SleepUtils.sleep(1000);
-        var emailsBeforeSendingInSent = indexPage.getEmailInSent();
+        final var emailsBeforeSendingInSent = indexPage.getEmailInSent();
         indexPage.clickWriteALetterButton();
         indexPage.fillToField(letterForMe);
         indexPage.fillSubjectField(subjectForMe);

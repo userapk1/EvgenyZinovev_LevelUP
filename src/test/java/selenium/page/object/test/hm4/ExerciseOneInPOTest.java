@@ -13,9 +13,9 @@ import utils.UtilsForHm4;
 
 public class ExerciseOneInPOTest extends BaseSeleniumTest {
 
-   private LoginRegistrationPage loginRegistrationPage;
-   private IndexPage indexPage;
-   private UtilsForHm4 utils;
+    private LoginRegistrationPage loginRegistrationPage;
+    private IndexPage indexPage;
+    private UtilsForHm4 utils;
 
 
     @Override
@@ -50,10 +50,10 @@ public class ExerciseOneInPOTest extends BaseSeleniumTest {
         SleepUtils.sleep(1000);
         indexPage.clickSentButtonInLayoutColumn();
         SleepUtils.sleep(1000);
-        var emailsBeforeSendingInSent = indexPage.getEmailInSent();
+        final var emailsBeforeSendingInSent = indexPage.getEmailInSent();
         indexPage.clickDraftsButtonInLayoutColumn();
         SleepUtils.sleep(1000);
-        var emailsBeforeSaveInDrafts = indexPage.getEmailInDrafts();
+        final var emailsBeforeSaveInDrafts = indexPage.getEmailInDrafts();
         indexPage.clickWriteALetterButton();
         indexPage.fillToField(destination);
         indexPage.fillSubjectField(subject);

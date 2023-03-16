@@ -25,24 +25,26 @@ public class UtilsForHm4 {
     }
 
     public void switchToFrame() {
-       WebElement frameElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
+        WebElement frameElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
             "//iframe[contains(@class, 'ag-popup__frame__layout__iframe')]")));
-          WebDriver frameDriver = driver.switchTo().frame(frameElement);
+        WebDriver frameDriver = driver.switchTo().frame(frameElement);
     }
 
     public void switchToCurrentPage() {
         var currentHandle = driver.getWindowHandle();
         driver.switchTo().window(currentHandle);
     }
+
     protected void click(final WebElement element) {
         wait.until(ExpectedConditions.elementToBeClickable(element)).click();
     }
+
     protected void sendKeys(final WebElement element, String text) {
         wait.until(ExpectedConditions.visibilityOf(element)).sendKeys(text);
     }
 
-    protected Integer amountOfElements(List <WebElement> element) {
-       return wait.until(ExpectedConditions.visibilityOfAllElements(element)).size();
+    protected Integer amountOfElements(List<WebElement> element) {
+        return wait.until(ExpectedConditions.visibilityOfAllElements(element)).size();
     }
 
     protected String getText(WebElement element) {

@@ -1,5 +1,6 @@
 package selenium.page.object.test.hm4;
 
+import java.util.Properties;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,6 +18,8 @@ public class ExerciseThreeInPOTest extends BaseSeleniumTest {
     private IndexPage indexPage;
     private UtilsForHm4 utils;
 
+    public Properties properties;
+
     @Override
     @BeforeEach
     public void setUp() {
@@ -25,7 +28,16 @@ public class ExerciseThreeInPOTest extends BaseSeleniumTest {
         indexPage = new IndexPage(driver);
         utils = new UtilsForHm4(driver);
         PageFactory.initElements(driver, this);
+
+        /*properties = new Properties();
+        try {
+            properties.load(this.getClass().getResourceAsStream(PATH_TO_PROPERTIES));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }*/
     }
+
+    /*protected String login11 = properties.getProperty("user.name");*/
 
     @Test
     @AllSeleniumOneTag
@@ -35,8 +47,8 @@ public class ExerciseThreeInPOTest extends BaseSeleniumTest {
         loginRegistrationPage.open();
         loginRegistrationPage.clickLoginButton1();
         utils.switchToFrame();
-        /*loginRegistrationPage.fillEmailTextField(sds(login));*/
         loginRegistrationPage.fillEmailTextField(login);
+        //System.out.println(login11);
         loginRegistrationPage.clickNextButton();
         loginRegistrationPage.fillPassTextField(pass);
         loginRegistrationPage.clickLoginButton2();
@@ -50,10 +62,10 @@ public class ExerciseThreeInPOTest extends BaseSeleniumTest {
         Assertions.assertThat(num).isEqualTo(7);
         indexPage.clickFolderToMyselfLetter();
         SleepUtils.sleep(1000);
-        var emailsBeforeSendingInToMyself = indexPage.getEmailInToMyself();
+        final var emailsBeforeSendingInToMyself = indexPage.getEmailInToMyself();
         indexPage.clickGarbageButton();
         SleepUtils.sleep(1000);
-        var emailsBeforeDeleteInGarbage = indexPage.getEmailInGarbage();
+        final var emailsBeforeDeleteInGarbage = indexPage.getEmailInGarbage();
         indexPage.clickWriteALetterButton();
         indexPage.fillToField(letterForMe);
         indexPage.fillSubjectField(subject);

@@ -12,30 +12,19 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public abstract class BaseSeleniumTest {
 
-    /*public static final String PATH_TO_PROPERTIES = "src/main/resources/config.properties";
-    static  Properties property = new Properties();
-    FileInputStream fis;
-    protected String sds(String string) throws IOException {
-        fis = new FileInputStream(PATH_TO_PROPERTIES);
-        property.load(fis);
-        return string;
-    }
-    */
     protected static final String URL = "https://mail.ru";
     protected static final String login = "test.lvlup";
-
-    /*protected static final  String login = property.getProperty("login");*/
     protected static final String pass = "klik_1360";
     protected static final String destination = "test@mail.ru";
     protected static final String letterForMe = "test.lvlup@mail.ru";
     protected static final String subject = "test";
-
     protected static final String subjectForMe = "Тест";
     protected static final String bodyLetter = "testBody";
-
     protected WebDriver driver;
     protected WebDriverWait wait;
     protected Faker faker;
+    public static final String PATH_TO_PROPERTIES = "/config.properties";
+    /*public Properties properties;*/
 
 
     @BeforeEach
@@ -46,7 +35,16 @@ public abstract class BaseSeleniumTest {
         driver = new ChromeDriver(options);
         wait = new WebDriverWait(driver, Duration.ofMillis(10000));
         PageFactory.initElements(driver, this);
+
+        /*properties = new Properties();
+        try {
+            properties.load(this.getClass().getResourceAsStream(PATH_TO_PROPERTIES));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }*/
     }
+
+    /*protected String login11 = properties.getProperty("user.name");*/
 
     @AfterEach
         public void tearDown() {
