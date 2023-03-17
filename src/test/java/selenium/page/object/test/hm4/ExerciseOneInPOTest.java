@@ -31,7 +31,7 @@ public class ExerciseOneInPOTest extends BaseSeleniumTest {
         utils = new UtilsForHm4(driver);
         PageFactory.initElements(driver, this);
 
-        Properties properties = new Properties();
+        properties = new Properties();
 
         try {
             properties.load(this.getClass().getResourceAsStream(PATH_TO_PROPERTIES));
