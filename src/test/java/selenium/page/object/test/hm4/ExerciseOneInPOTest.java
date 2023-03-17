@@ -1,5 +1,7 @@
 package selenium.page.object.test.hm4;
 
+import java.io.IOException;
+import java.util.Properties;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,6 +19,8 @@ public class ExerciseOneInPOTest extends BaseSeleniumTest {
     private IndexPage indexPage;
     private UtilsForHm4 utils;
 
+    private Properties properties;
+
 
     @Override
     @BeforeEach
@@ -26,6 +30,14 @@ public class ExerciseOneInPOTest extends BaseSeleniumTest {
         indexPage = new IndexPage(driver);
         utils = new UtilsForHm4(driver);
         PageFactory.initElements(driver, this);
+
+        Properties properties = new Properties();
+
+        try {
+            properties.load(this.getClass().getResourceAsStream(PATH_TO_PROPERTIES));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Test
@@ -36,8 +48,7 @@ public class ExerciseOneInPOTest extends BaseSeleniumTest {
         loginRegistrationPage.open();
         loginRegistrationPage.clickLoginButton1();
         utils.switchToFrame();
-        /*loginRegistrationPage.fillEmailTextField(sds(login));*/
-        loginRegistrationPage.fillEmailTextField(login);
+        loginRegistrationPage.fillEmailTextField(login11);
         loginRegistrationPage.clickNextButton();
         loginRegistrationPage.fillPassTextField(pass);
         loginRegistrationPage.clickLoginButton2();

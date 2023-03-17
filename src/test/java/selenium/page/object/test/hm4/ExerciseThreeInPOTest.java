@@ -1,5 +1,6 @@
 package selenium.page.object.test.hm4;
 
+import java.io.IOException;
 import java.util.Properties;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,8 +18,7 @@ public class ExerciseThreeInPOTest extends BaseSeleniumTest {
     private LoginRegistrationPage loginRegistrationPage;
     private IndexPage indexPage;
     private UtilsForHm4 utils;
-
-    public Properties properties;
+    private static Properties properties;
 
     @Override
     @BeforeEach
@@ -29,15 +29,14 @@ public class ExerciseThreeInPOTest extends BaseSeleniumTest {
         utils = new UtilsForHm4(driver);
         PageFactory.initElements(driver, this);
 
-        /*properties = new Properties();
+        properties = new Properties();
         try {
             properties.load(this.getClass().getResourceAsStream(PATH_TO_PROPERTIES));
         } catch (IOException e) {
             throw new RuntimeException(e);
-        }*/
+        }
     }
 
-    /*protected String login11 = properties.getProperty("user.name");*/
 
     @Test
     @AllSeleniumOneTag
@@ -47,8 +46,7 @@ public class ExerciseThreeInPOTest extends BaseSeleniumTest {
         loginRegistrationPage.open();
         loginRegistrationPage.clickLoginButton1();
         utils.switchToFrame();
-        loginRegistrationPage.fillEmailTextField(login);
-        //System.out.println(login11);
+        loginRegistrationPage.fillEmailTextField(login11);
         loginRegistrationPage.clickNextButton();
         loginRegistrationPage.fillPassTextField(pass);
         loginRegistrationPage.clickLoginButton2();

@@ -1,7 +1,9 @@
 package selenium.basic.test.hm3;
 
 import com.github.javafaker.Faker;
+import java.io.IOException;
 import java.time.Duration;
+import java.util.Properties;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
@@ -11,9 +13,10 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public abstract class BaseSeleniumTest {
-
+    private static Properties properties;
     protected static final String URL = "https://mail.ru";
     protected static final String login = "test.lvlup";
+    protected static final String login11 = properties.getProperty("user.login");
     protected static final String pass = "klik_1360";
     protected static final String destination = "test@mail.ru";
     protected static final String letterForMe = "test.lvlup@mail.ru";
@@ -24,7 +27,6 @@ public abstract class BaseSeleniumTest {
     protected WebDriverWait wait;
     protected Faker faker;
     public static final String PATH_TO_PROPERTIES = "/config.properties";
-    /*public Properties properties;*/
 
 
     @BeforeEach
@@ -36,15 +38,8 @@ public abstract class BaseSeleniumTest {
         wait = new WebDriverWait(driver, Duration.ofMillis(10000));
         PageFactory.initElements(driver, this);
 
-        /*properties = new Properties();
-        try {
-            properties.load(this.getClass().getResourceAsStream(PATH_TO_PROPERTIES));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }*/
     }
 
-    /*protected String login11 = properties.getProperty("user.name");*/
 
     @AfterEach
         public void tearDown() {
