@@ -18,7 +18,6 @@ public class ExerciseThreeInPOTest extends BaseSeleniumTest {
     private LoginRegistrationPage loginRegistrationPage;
     private IndexPage indexPage;
     private UtilsForHm4 utils;
-    private static Properties properties;
 
     @Override
     @BeforeEach
@@ -28,13 +27,6 @@ public class ExerciseThreeInPOTest extends BaseSeleniumTest {
         indexPage = new IndexPage(driver);
         utils = new UtilsForHm4(driver);
         PageFactory.initElements(driver, this);
-
-        properties = new Properties();
-        try {
-            properties.load(this.getClass().getResourceAsStream(PATH_TO_PROPERTIES));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 
 

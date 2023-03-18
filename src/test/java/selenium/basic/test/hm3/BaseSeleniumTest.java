@@ -11,12 +11,13 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import selenium.page.object.hm4.configuration.ConfigProvider;
 
 public abstract class BaseSeleniumTest {
-    private static Properties properties;
+    /*private static Properties properties;*/
     protected static final String URL = "https://mail.ru";
     protected static final String login = "test.lvlup";
-    protected static final String login11 = properties.getProperty("user.login");
+    protected final String login11 = ConfigProvider.staticVeriables().getLogin();
     protected static final String pass = "klik_1360";
     protected static final String destination = "test@mail.ru";
     protected static final String letterForMe = "test.lvlup@mail.ru";
@@ -26,7 +27,7 @@ public abstract class BaseSeleniumTest {
     protected WebDriver driver;
     protected WebDriverWait wait;
     protected Faker faker;
-    public static final String PATH_TO_PROPERTIES = "/config.properties";
+    /*public static final String PATH_TO_PROPERTIES = "/config.properties";*/
 
 
     @BeforeEach

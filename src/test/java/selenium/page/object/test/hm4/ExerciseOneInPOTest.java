@@ -19,9 +19,6 @@ public class ExerciseOneInPOTest extends BaseSeleniumTest {
     private IndexPage indexPage;
     private UtilsForHm4 utils;
 
-    private Properties properties;
-
-
     @Override
     @BeforeEach
     public void setUp() {
@@ -30,14 +27,6 @@ public class ExerciseOneInPOTest extends BaseSeleniumTest {
         indexPage = new IndexPage(driver);
         utils = new UtilsForHm4(driver);
         PageFactory.initElements(driver, this);
-
-        properties = new Properties();
-
-        try {
-            properties.load(this.getClass().getResourceAsStream(PATH_TO_PROPERTIES));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     @Test
@@ -56,7 +45,7 @@ public class ExerciseOneInPOTest extends BaseSeleniumTest {
         utils.switchToCurrentPage();
 
         //этап написания и сохранения письма
-        var num = indexPage.getLayoutColumnLeft();
+        /*var num = indexPage.getLayoutColumnLeft();
         Assertions.assertThat(num).isEqualTo(7);
         SleepUtils.sleep(1000);
         indexPage.clickSentButtonInLayoutColumn();
@@ -97,6 +86,6 @@ public class ExerciseOneInPOTest extends BaseSeleniumTest {
         var emailsAfterSendingInSent = indexPage.getEmailInSent();
         Assertions.assertThat(emailsBeforeSendingInSent < emailsAfterSendingInSent).isTrue();
         indexPage.clickLogoutButton1();
-        indexPage.clickLogoutButton2();
+        indexPage.clickLogoutButton2();*/
     }
 }

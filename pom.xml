@@ -24,6 +24,8 @@
         <selenium-java.version>4.8.1</selenium-java.version>
         <assertj-core.version>3.24.2</assertj-core.version>
         <javafaker.version>1.0.2</javafaker.version>
+        <owner.version>1.0.12</owner.version>
+
     </properties>
 
     <profiles>
@@ -96,6 +98,18 @@
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
             <version>3.24.2</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.aeonbits.owner</groupId>
+            <artifactId>owner</artifactId>
+            <version>${owner.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>RELEASE</version>
             <scope>compile</scope>
         </dependency>
 
