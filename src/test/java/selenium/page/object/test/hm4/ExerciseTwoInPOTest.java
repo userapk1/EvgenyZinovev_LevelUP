@@ -1,7 +1,5 @@
 package selenium.page.object.test.hm4;
 
-import java.io.IOException;
-import java.util.Properties;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -37,7 +35,7 @@ public class ExerciseTwoInPOTest extends BaseSeleniumTest {
         loginRegistrationPage.open();
         loginRegistrationPage.clickLoginButton1();
         utils.switchToFrame();
-        loginRegistrationPage.fillEmailTextField(login11);
+        loginRegistrationPage.fillEmailTextField(login);
         loginRegistrationPage.clickNextButton();
         loginRegistrationPage.fillPassTextField(pass);
         loginRegistrationPage.clickLoginButton2();

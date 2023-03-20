@@ -1,9 +1,7 @@
 package selenium.basic.test.hm3;
 
 import com.github.javafaker.Faker;
-import java.io.IOException;
 import java.time.Duration;
-import java.util.Properties;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
@@ -15,19 +13,17 @@ import selenium.page.object.hm4.configuration.ConfigProvider;
 
 public abstract class BaseSeleniumTest {
     /*private static Properties properties;*/
-    protected static final String URL = "https://mail.ru";
-    protected static final String login = "test.lvlup";
-    protected final String login11 = ConfigProvider.staticVeriables().getLogin();
-    protected static final String pass = "klik_1360";
-    protected static final String destination = "test@mail.ru";
-    protected static final String letterForMe = "test.lvlup@mail.ru";
-    protected static final String subject = "test";
-    protected static final String subjectForMe = "Тест";
-    protected static final String bodyLetter = "testBody";
+    protected static final String URL = ConfigProvider.staticVeriables().getURL();
+    protected final String login = ConfigProvider.staticVeriables().getLogin();
+    protected static final String pass = ConfigProvider.staticVeriables().getPass();
+    protected static final String destination = ConfigProvider.staticVeriables().getDestination();
+    protected static final String letterForMe = ConfigProvider.staticVeriables().getLetterForMe();
+    protected static final String subject = ConfigProvider.staticVeriables().getSubject();
+    protected static final String subjectForMe = ConfigProvider.staticVeriables().getSubjectForMe();
+    protected static final String bodyLetter = ConfigProvider.staticVeriables().getBodyLetter();
     protected WebDriver driver;
     protected WebDriverWait wait;
     protected Faker faker;
-    /*public static final String PATH_TO_PROPERTIES = "/config.properties";*/
 
 
     @BeforeEach
