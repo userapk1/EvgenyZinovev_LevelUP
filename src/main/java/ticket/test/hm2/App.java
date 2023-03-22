@@ -1,10 +1,12 @@
 package ticket.test.hm2;
 
+import com.github.javafaker.Faker;
+
 public class App {
 
-   /* public static void main(String[] args){
+    public static void main(String[] args){
 
-        String input = String.valueOf(112217);
+        /*String input = String.valueOf(112217);
 
 
             char one = input.charAt(0), two = input.charAt(1), three = input.charAt(2), four = input.charAt(3),
@@ -14,10 +16,14 @@ public class App {
                 :(sum1==sum2 && input.length()>6)? "Число должно состоять из 6 цифр"
                     :(sum1!=sum2 && input.length()>6)? "Число должно состоять из 6 цифр" : "false";
 
-            System.out.printf("%s", result);
+            System.out.printf("%s", result);*/
 
 
-    }*/
+        final var faker = new Faker();
+        final var email = faker.internet().emailAddress().toLowerCase();
+        System.out.println(email);
+
+    }
 
 
 }
