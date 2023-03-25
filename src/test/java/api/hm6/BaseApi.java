@@ -5,7 +5,6 @@ import com.github.javafaker.Faker;
 import io.restassured.RestAssured;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.filter.log.LogDetail;
-import io.restassured.http.Header;
 import io.restassured.specification.ResponseSpecification;
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.BeforeAll;
@@ -13,13 +12,26 @@ import org.junit.jupiter.api.BeforeEach;
 
 public abstract class BaseApi {
 
+
+    /*DocumentContext body = null;
+    void createPerson() {
+        try {
+           body = JsonPath.parse(new File("src/main/resources/createPersonBodyForHm6.json"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }*/
+
     protected static final String token = ConfigProvider.staticVeriables().getMyToken();
     protected static final String SERVICE_BASE_URI = "https://gorest.co.in";
-    protected static final String SERVICE_BASE_PATH = "/public/v2"; ///users
+    protected static final String SERVICE_BASE_PATH = "/public/v2";
 
     protected ResponseSpecification responseSpecificationStatusOk;
     protected ResponseSpecification responseSpecificationStatusCreated;
     protected Faker faker;
+
+    /*protected final String email = faker.internet().emailAddress();
+    protected final String name = String.valueOf(faker.funnyName());*/
 
 
     @BeforeAll
@@ -40,7 +52,6 @@ public abstract class BaseApi {
             .expectStatusCode(HttpStatus.SC_CREATED)
             .build();
 
-        final var faker = new Faker();
-        final var randomEmail = faker.internet().emailAddress().toLowerCase();
+        faker = new Faker();
     }
 }
