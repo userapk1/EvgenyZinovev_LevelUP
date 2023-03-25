@@ -2,6 +2,8 @@ package api.hm6;
 
 import api.hm6.configuration.ConfigProvider;
 import com.github.javafaker.Faker;
+import com.jayway.jsonpath.DocumentContext;
+import com.jayway.jsonpath.JsonPath;
 import io.restassured.RestAssured;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.filter.log.LogDetail;
@@ -9,18 +11,18 @@ import io.restassured.specification.ResponseSpecification;
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import java.io.File;
+import java.io.IOException;
 
 public abstract class BaseApi {
-
-
-    /*DocumentContext body = null;
+    protected DocumentContext body;
     void createPerson() {
         try {
            body = JsonPath.parse(new File("src/main/resources/createPersonBodyForHm6.json"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }*/
+    }
 
     protected static final String token = ConfigProvider.staticVeriables().getMyToken();
     protected static final String SERVICE_BASE_URI = "https://gorest.co.in";
@@ -29,10 +31,6 @@ public abstract class BaseApi {
     protected ResponseSpecification responseSpecificationStatusOk;
     protected ResponseSpecification responseSpecificationStatusCreated;
     protected Faker faker;
-
-    /*protected final String email = faker.internet().emailAddress();
-    protected final String name = String.valueOf(faker.funnyName());*/
-
 
     @BeforeAll
     static void beforeAll() {
