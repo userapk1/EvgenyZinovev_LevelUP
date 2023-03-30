@@ -16,20 +16,31 @@ import java.io.IOException;
 
 public abstract class BaseApi {
     protected DocumentContext body;
-    void createPerson() {
+    protected DocumentContext updateBody;
+    void person() {
         try {
-           body = JsonPath.parse(new File("src/main/resources/createPersonBodyForHm6.json"));
+           body = JsonPath.parse(new File("src/main/resources/personBodyForHm6.json"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    void personUp() {
+        try {
+            updateBody = JsonPath.parse(new File("src/main/resources/personBodyForHm6.json"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
     protected static final String token = ConfigProvider.staticVeriables().getMyToken();
+    //protected static final String userId = ConfigProvider.staticVeriables().getUserId();
     protected static final String SERVICE_BASE_URI = "https://gorest.co.in";
     protected static final String SERVICE_BASE_PATH = "/public/v2";
 
     protected ResponseSpecification responseSpecificationStatusOk;
     protected ResponseSpecification responseSpecificationStatusCreated;
+    protected ResponseSpecification responseSpecificationStatusNoContent;
     protected Faker faker;
 
     @BeforeAll
@@ -48,6 +59,11 @@ public abstract class BaseApi {
         responseSpecificationStatusCreated = new ResponseSpecBuilder()
             .log(LogDetail.ALL)
             .expectStatusCode(HttpStatus.SC_CREATED)
+            .build();
+
+        responseSpecificationStatusNoContent = new ResponseSpecBuilder()
+            .log(LogDetail.ALL)
+            .expectStatusCode(HttpStatus.SC_NO_CONTENT)
             .build();
 
         faker = new Faker();

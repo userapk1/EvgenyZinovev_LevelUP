@@ -12,5 +12,8 @@ public interface StaticVeriables extends Config {
     @Key("my.token")
     String getMyToken();
 
+    /*@Key("user.id")
+    String getUserId();*/
+
 
 }

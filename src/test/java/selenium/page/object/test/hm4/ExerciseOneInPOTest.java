@@ -45,7 +45,7 @@ public class ExerciseOneInPOTest extends BaseSeleniumTest {
         utils.switchToCurrentPage();
 
         //этап написания и сохранения письма
-        /*var num = indexPage.getLayoutColumnLeft();
+        var num = indexPage.getLayoutColumnLeft();
         Assertions.assertThat(num).isEqualTo(7);
         SleepUtils.sleep(1000);
         indexPage.clickSentButtonInLayoutColumn();
@@ -86,6 +86,6 @@ public class ExerciseOneInPOTest extends BaseSeleniumTest {
         var emailsAfterSendingInSent = indexPage.getEmailInSent();
         Assertions.assertThat(emailsBeforeSendingInSent < emailsAfterSendingInSent).isTrue();
         indexPage.clickLogoutButton1();
-        indexPage.clickLogoutButton2();*/
+        indexPage.clickLogoutButton2();
     }
 }
