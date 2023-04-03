@@ -66,6 +66,7 @@ public class ExeciseThree extends BaseSeleniumTest {
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
             "//a[@href='/trash/?']"))).click();
 
+
         int emailsInGarbage;
         emailsInGarbage = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(
             "//*[@class='ReactVirtualized__Grid__innerScrollContainer']/a"))).size();
@@ -73,6 +74,7 @@ public class ExeciseThree extends BaseSeleniumTest {
         //нажимаем написать письмо
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
             "//span[@class='compose-button__ico']//*[@class='ico ico_16-compose ico_size_s']"))).click();
+
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By
                 .xpath("//div[contains(@class, 'head_container')]//input[contains(@class, 'container')]")))
@@ -89,6 +91,7 @@ public class ExeciseThree extends BaseSeleniumTest {
         //отправили и закрыли фрейм
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
             "//div[contains(@class, 'footer')]//button[contains(@data-test-id, 'send')]"))).click();
+            
         //close frame
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
             "//div[contains(@class, 'layer layer')]//span[@class='button2__wrapper button2__wrapper_centered']")))

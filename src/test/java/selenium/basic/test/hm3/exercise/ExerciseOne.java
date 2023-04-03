@@ -76,7 +76,6 @@ public  class ExerciseOne extends BaseSeleniumTest {
 
         int emailsInSent = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(
             "//*[@class='ReactVirtualized__Grid__innerScrollContainer']/a"))).size();
-        System.out.println(emailsInSent);
 
         //cмотрим скока записей в черновиках
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
@@ -104,13 +103,13 @@ public  class ExerciseOne extends BaseSeleniumTest {
                 .xpath("//div[contains(@class, 'editable')]/div/div[2]")))
             .sendKeys(bodyLetter);
 
-
         //сохраняем черновик
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
             "//div[contains(@class, 'footer')]//button[contains(@data-test-id, 'save')]"))).click();
         //загрываем фрейм
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
             "//div[contains(@class, 'compose-app_fix')]//button[@tabindex = '700']"))).click();
+
 
         int emailsInDrafts2 = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(
             "//*[@class='ReactVirtualized__Grid__innerScrollContainer']/a")))
@@ -141,6 +140,7 @@ public  class ExerciseOne extends BaseSeleniumTest {
 
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
             "//div[contains(@class, 'footer')]//button[contains(@data-test-id, 'send')]"))).click();
+
         //close frame
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
             "//div[contains(@class, 'layer layer')]//span[@class='button2__wrapper button2__wrapper_centered']")))
@@ -158,6 +158,7 @@ public  class ExerciseOne extends BaseSeleniumTest {
         int emailsInSent2 = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(
             "//*[@class='ReactVirtualized__Grid__innerScrollContainer']/a"))).size();
         System.out.println(emailsInSent2);
+
         Assertions.assertThat(emailsInSent < emailsInSent2).isTrue();
 
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
