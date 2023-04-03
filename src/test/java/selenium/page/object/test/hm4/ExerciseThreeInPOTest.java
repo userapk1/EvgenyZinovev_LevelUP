@@ -40,7 +40,6 @@ public class ExerciseThreeInPOTest extends BaseSeleniumTest {
         loginRegistrationPage.clickNextButton();
         loginRegistrationPage.fillPassTextField(pass);
         loginRegistrationPage.clickLoginButton2();
-        SleepUtils.sleep(1000);
         utils.switchToCurrentPage();
 
 
@@ -49,10 +48,8 @@ public class ExerciseThreeInPOTest extends BaseSeleniumTest {
         var num = indexPage.getLayoutColumnLeft();
         Assertions.assertThat(num).isEqualTo(7);
         indexPage.clickFolderToMyselfLetter();
-        SleepUtils.sleep(1000);
         final var emailsBeforeSendingInToMyself = indexPage.getEmailInToMyself();
         indexPage.clickGarbageButton();
-        SleepUtils.sleep(1000);
         final var emailsBeforeDeleteInGarbage = indexPage.getEmailInGarbage();
         indexPage.clickWriteALetterButton();
         indexPage.fillToField(letterForMe);
@@ -62,23 +59,18 @@ public class ExerciseThreeInPOTest extends BaseSeleniumTest {
         indexPage.clickCloseFrameButton2();
         indexPage.clickIncomingButtonInLayoutColumn();
         indexPage.clickFolderToMyselfLetter();
-        SleepUtils.sleep(1000);
         var emailsAfterSendingInToMyself = indexPage.getEmailInToMyself();
         Assertions.assertThat(emailsBeforeSendingInToMyself < emailsAfterSendingInToMyself).isTrue();
         indexPage.clickLastLetterInFolderToMyself();
-        SleepUtils.sleep(1000);
         var checkFieldTo = indexPage.getToFieldInsideInPackageTest();
         Assertions.assertThat(checkFieldTo).contains(letterForMe);
-        SleepUtils.sleep(1000);
         var checkFieldSubject = indexPage.getSubjectFieldInsideInPackageTest();
         Assertions.assertThat(subject).isEqualTo(checkFieldSubject);
-        SleepUtils.sleep(1000);
         var checkFieldBody = indexPage.getBodyFieldInsideInPackageTest();
         Assertions.assertThat(checkFieldBody).contains(bodyLetter);
         indexPage.clickDeleteButton();
         indexPage.clickCloseFrameButtonAfterDeletedLetter();
         indexPage.clickGarbageButton();
-        SleepUtils.sleep(1000);
         var emailsAfterDeleteInGarbage = indexPage.getEmailInGarbage();
         Assertions.assertThat(emailsBeforeDeleteInGarbage < emailsAfterDeleteInGarbage).isTrue();
         indexPage.clickLogoutButton1();
