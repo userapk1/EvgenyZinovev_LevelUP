@@ -8,18 +8,20 @@ import io.restassured.RestAssured;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.specification.ResponseSpecification;
+import java.io.File;
+import java.io.IOException;
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import java.io.File;
-import java.io.IOException;
 
 public abstract class BaseApi {
-    protected DocumentContext body;
-    protected DocumentContext updateBody;
+    protected DocumentContext bodyPerson;
+    protected DocumentContext updateBodyPerson;
+    protected DocumentContext bodyPost;
+    protected DocumentContext updateBodyPost;
     void person() {
         try {
-           body = JsonPath.parse(new File("src/main/resources/personBodyForHm6.json"));
+           bodyPerson = JsonPath.parse(new File("src/main/resources/personBodyForHm6.json"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -27,14 +29,28 @@ public abstract class BaseApi {
 
     void personUp() {
         try {
-            updateBody = JsonPath.parse(new File("src/main/resources/personBodyForHm6.json"));
+            updateBodyPerson = JsonPath.parse(new File("src/main/resources/personBodyForHm6.json"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    void post() {
+        try {
+            bodyPost = JsonPath.parse(new File("src/main/resources/postsBodyForHm6.json"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    void postUp() {
+        try {
+            updateBodyPost = JsonPath.parse(new File("src/main/resources/postsBodyForHm6.json"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
     protected static final String token = ConfigProvider.staticVeriables().getMyToken();
-    //protected static final String userId = ConfigProvider.staticVeriables().getUserId();
     protected static final String SERVICE_BASE_URI = "https://gorest.co.in";
     protected static final String SERVICE_BASE_PATH = "/public/v2";
 

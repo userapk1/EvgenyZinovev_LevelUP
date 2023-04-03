@@ -17,6 +17,7 @@ public class RestAssuredUsersTest extends BaseApi {
 
     @Test
     void viewAllUsers() {
+
         given()
             .header("Authorization", "Bearer "+ token)
             .log().all()
@@ -31,17 +32,28 @@ public class RestAssuredUsersTest extends BaseApi {
         final var email = faker.internet().emailAddress().toLowerCase();
         final var name = faker.name().fullName().toLowerCase();
         final var nameTwo = faker.name().fullName().toLowerCase();
-        final int id = 576853;
+        final var title = faker.random().hex();
+        final var titleTwo = faker.random().hex();
+        //временные переменные
+        final int userId = 598207;
+        final int postId =6644;
+        final int commentId=;
 
-        body = body.set("email", email)
+        bodyPerson = bodyPerson.set("email", email)
                    .set("name", name);
 
-        updateBody = updateBody.set("name", nameTwo);
+        updateBodyPerson = updateBodyPerson.set("name", nameTwo);
 
-        /*given()
+        bodyPost = bodyPost.set("title", title)
+                           .set("user_id", userId);
+
+        updateBodyPost = updateBodyPost.set("title", titleTwo);
+
+        //создание, просмотр, апдейт пользователя
+        given()
             .header("Authorization", "Bearer " + token)
             .header("content-type", "application/json")
-            .body(body.jsonString())
+            .body(bodyPerson.jsonString())
             .log().all()
             .when()
             .post("/users")
@@ -55,34 +67,92 @@ public class RestAssuredUsersTest extends BaseApi {
             .header("content-type", "application/json")
             .log().all()
             .when()
-            .get("/users/" + id)
+            .get("/users/" + userId)
             .then()
             .spec(responseSpecificationStatusOk)
             .body("email", equalTo(email))
             .body("name", equalTo(name))
-            .body("id", Matchers.equalTo(id));*/
+            .body("id", equalTo(userId));
 
         given()
             .header("Authorization", "Bearer " + token)
             .header("content-type", "application/json")
-            .body(updateBody.jsonString())
+            .body(updateBodyPerson.jsonString())
             .log().all()
             .when()
-            .put("/users/" + id)
+            .put("/users/" + userId)
             .then()
             .spec(responseSpecificationStatusOk)
             .body("name", equalTo(nameTwo))
-            .body("id", equalTo(id));
+            .body("id", equalTo(userId));
 
-        /*given()
+        //создание, просмотр, апдейт поста
+        given()
+            .header("Authorization", "Bearer " + token)
+            .header("content-type", "application/json")
+            .body(bodyPost.jsonString())
+            .log().all()
+            .when()
+            .post("/posts")
+            .then()
+            .spec(responseSpecificationStatusCreated)
+            .body("user_id", equalTo(userId));
+
+        given()
             .header("Authorization", "Bearer " + token)
             .header("content-type", "application/json")
             .log().all()
             .when()
-            .delete("/users/" + id)
+            .get("/post/" + id)
+            .then()
+            .spec(responseSpecificationStatusOk)
+            .body("user_id", equalTo(userId))
+            .body("id", equalTo(id));
+
+        given()
+            .header("Authorization", "Bearer " + token)
+            .header("content-type", "application/json")
+            .body(updateBodyPost.jsonString())
+            .log().all()
+            .when()
+            .put("/post/" + id)
+            .then()
+            .spec(responseSpecificationStatusOk)
+            .body("user_id", equalTo(userIdTwo))
+            .body("id", equalTo(id));
+
+
+
+
+
+
+
+
+
+
+
+
+        //удаление поста
+        given()
+            .header("Authorization", "Bearer " + token)
+            .header("content-type", "application/json")
+            .log().all()
+            .when()
+            .delete("/post/" + id)
             .then()
             .spec(responseSpecificationStatusNoContent)
-            .body(Matchers.emptyString());*/
+            .body(Matchers.emptyString());
+
+        //удаление пользователя
+        given()
+            .header("Authorization", "Bearer " + token)
+            .header("content-type", "application/json")
+            .log().all()
+            .when()
+            .delete("/users/" + userId)
+            .then()
+            .spec(responseSpecificationStatusNoContent)
+            .body(Matchers.emptyString());
     }
 
 }
