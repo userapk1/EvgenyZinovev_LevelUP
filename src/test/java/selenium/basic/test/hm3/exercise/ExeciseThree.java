@@ -41,13 +41,10 @@ public class ExeciseThree extends BaseSeleniumTest {
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
             "//*[@id='login-content']//button[@data-test-id='submit-button']"))).click();
 
-        SleepUtils.sleep(2000);
         var currentHandle = driver.getWindowHandle();
         driver.switchTo().window(currentHandle);
 
         //проверяем шо ход выполнен
-        SleepUtils
-            .sleep(2000);
         List<WebElement> searchList = wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(By
             .xpath("//div[contains(@class, 'layout__column_left')]//a[contains(@class,"
                 + " 'child-level_0')]//div[@class='nav__folder-name__txt']"), 3));
@@ -60,7 +57,6 @@ public class ExeciseThree extends BaseSeleniumTest {
             "//div[@class='ReactVirtualized__Grid__innerScrollContainer']//div[@class='metathread__contain']/div/a")))
             .click();
 
-        SleepUtils.sleep(1000);
         int emailsInIncoming;
         emailsInIncoming = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(
             "//*[@class='ReactVirtualized__Grid__innerScrollContainer']/a"))).size();
@@ -69,7 +65,6 @@ public class ExeciseThree extends BaseSeleniumTest {
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
             "//a[@href='/trash/?']"))).click();
 
-        SleepUtils.sleep(1000);
         int emailsInGarbage;
         emailsInGarbage = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(
             "//*[@class='ReactVirtualized__Grid__innerScrollContainer']/a"))).size();
@@ -107,7 +102,6 @@ public class ExeciseThree extends BaseSeleniumTest {
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
             "//div[@class='layout__main-frame']//div[@class='metathread__contain']/div/a"))).click();
 
-        SleepUtils.sleep(2000);
         int emailsInIncoming2 = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(
             "//*[@class='ReactVirtualized__Grid__innerScrollContainer']/a"))).size();
         Assertions.assertThat(emailsInIncoming < emailsInIncoming2).isTrue();
@@ -117,7 +111,7 @@ public class ExeciseThree extends BaseSeleniumTest {
             "//div[@class='layout__main-frame']//div[@class='metathread__contain']//a"))).click();*/
 
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-            "//div[@class='ReactVirtualized__Grid__innerScrollContainer']/a[1]"))).click();
+            "//a[contains(@class,'llc llc_normal llc_first')]"))).click();
 
         //проверяяем соответствие полей
         String checkFieldTo = wait.until(ExpectedConditions.visibilityOfElementLocated(By
@@ -146,7 +140,6 @@ public class ExeciseThree extends BaseSeleniumTest {
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
             "//a[@href='/trash/?']"))).click();
 
-        SleepUtils.sleep(1000);
         int emailsInGarbage2 = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(
             "//*[@class='ReactVirtualized__Grid__innerScrollContainer']/a"))).size();
         Assertions.assertThat(emailsInGarbage < emailsInGarbage2).isTrue();
