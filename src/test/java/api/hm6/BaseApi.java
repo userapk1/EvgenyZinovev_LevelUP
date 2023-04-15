@@ -5,8 +5,11 @@ import com.github.javafaker.Faker;
 import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
 import io.restassured.RestAssured;
+import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.filter.log.LogDetail;
+import io.restassured.http.ContentType;
+import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 import java.io.File;
 import java.io.IOException;
@@ -57,6 +60,8 @@ public abstract class BaseApi {
     protected ResponseSpecification responseSpecificationStatusOk;
     protected ResponseSpecification responseSpecificationStatusCreated;
     protected ResponseSpecification responseSpecificationStatusNoContent;
+
+    protected RequestSpecification requestSpecification;
     protected Faker faker;
 
     @BeforeAll
@@ -67,6 +72,12 @@ public abstract class BaseApi {
 
     @BeforeEach
     void setUp() {
+        requestSpecification = new RequestSpecBuilder()
+            .addHeader("content-type", "application/json")
+            .addHeader("Authorization", "Bearer " + token)
+            .log(LogDetail.ALL)
+            .build();
+
         responseSpecificationStatusOk = new ResponseSpecBuilder()
             .log(LogDetail.ALL)
             .expectStatusCode(HttpStatus.SC_OK)

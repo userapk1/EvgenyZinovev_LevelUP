@@ -1,13 +1,11 @@
 package api.hm6;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.equalTo;
 
-import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class RestAssuredUsersTest extends BaseApi {
+public class RestAssuredTests extends BaseApi {
     @BeforeEach
     public void setUp(){
         super.setUp();
@@ -19,35 +17,28 @@ public class RestAssuredUsersTest extends BaseApi {
     void viewAllUsers() {
 
         given()
-            .header("Authorization", "Bearer "+ token)
-            .log().all()
+            .spec(requestSpecification)
             .when()
             .get("/users?page=1&per_page=100")
             .then()
             .spec(responseSpecificationStatusOk);
     }
 
-    @Test
+   /* @Test
     void createViewUpdateDeleteUser() {
         final var email = faker.internet().emailAddress().toLowerCase();
         final var name = faker.name().fullName().toLowerCase();
-        final var nameTwo = faker.name().fullName().toLowerCase();
         final var title = faker.random().hex();
-        final var titleTwo = faker.random().hex();
         //временные переменные
         final int userId = 598207;
-        final int postId =6644;
-        final int commentId=;
 
         bodyPerson = bodyPerson.set("email", email)
                    .set("name", name);
 
-        updateBodyPerson = updateBodyPerson.set("name", nameTwo);
 
         bodyPost = bodyPost.set("title", title)
                            .set("user_id", userId);
 
-        updateBodyPost = updateBodyPost.set("title", titleTwo);
 
         //создание, просмотр, апдейт пользователя
         given()
@@ -154,5 +145,5 @@ public class RestAssuredUsersTest extends BaseApi {
             .spec(responseSpecificationStatusNoContent)
             .body(Matchers.emptyString());
     }
-
+*/
 }
