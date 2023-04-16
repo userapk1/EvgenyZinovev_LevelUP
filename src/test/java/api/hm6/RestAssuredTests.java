@@ -1,7 +1,11 @@
 package api.hm6;
 
-import static io.restassured.RestAssured.given;
-
+import api.hm6.configuration.data.posts.CreatePostReq;
+import api.hm6.configuration.data.posts.PostResponse;
+import api.hm6.configuration.data.users.CreateUserReq;
+import api.hm6.configuration.data.users.UserResponse;
+import api.hm6.service.PostsService;
+import api.hm6.service.UsersService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -9,76 +13,60 @@ public class RestAssuredTests extends BaseApi {
     @BeforeEach
     public void setUp(){
         super.setUp();
-        person();
-        personUp();
     }
 
     @Test
     void viewAllUsers() {
-
-        given()
-            .spec(requestSpecification)
-            .when()
-            .get("/users?page=1&per_page=100")
+        usersService.viewAllUsers()
             .then()
             .spec(responseSpecificationStatusOk);
     }
 
-   /* @Test
-    void createViewUpdateDeleteUser() {
-        final var email = faker.internet().emailAddress().toLowerCase();
-        final var name = faker.name().fullName().toLowerCase();
-        final var title = faker.random().hex();
-        //временные переменные
-        final int userId = 598207;
+    @Test
+    void viewAllPosts() {
+        postsService.viewAllPosts()
+                    .then()
+                    .spec(responseSpecificationStatusOk);
+    }
 
-        bodyPerson = bodyPerson.set("email", email)
-                   .set("name", name);
+    @Test
+    void createViewUpdateDelete() {
+        var reqBodyForUser = generateUserCreateReqBody();
+        var reqModifyBodyForUser = generateUserModifyReqBody();
+        var createdUser = usersService.createUser(reqBodyForUser)
+                                      .then()
+                                      .spec(responseSpecificationStatusCreated)
+                                      .extract()
+                                      .as(UserResponse.class);
 
+        UsersService.checkCreateUser(reqBodyForUser,createdUser);
 
-        bodyPost = bodyPost.set("title", title)
-                           .set("user_id", userId);
+        var viewCreatedUser = usersService.getUser(createdUser.getId().toString())
+                                      .then()
+                                      .spec(responseSpecificationStatusOk)
+                                      .extract()
+                                      .as(UserResponse.class);
 
+        var modifyUser = usersService.putUser(reqModifyBodyForUser, createdUser.getId().toString())
+                                      .then()
+                                      .spec(responseSpecificationStatusOk)
+                                      .extract()
+                                      .as(UserResponse.class);
 
-        //создание, просмотр, апдейт пользователя
-        given()
-            .header("Authorization", "Bearer " + token)
-            .header("content-type", "application/json")
-            .body(bodyPerson.jsonString())
-            .log().all()
-            .when()
-            .post("/users")
-            .then()
-            .spec(responseSpecificationStatusCreated)
-            .body("email", equalTo(email))
-            .body("name", equalTo(name));
-
-        given()
-            .header("Authorization", "Bearer " + token)
-            .header("content-type", "application/json")
-            .log().all()
-            .when()
-            .get("/users/" + userId)
-            .then()
-            .spec(responseSpecificationStatusOk)
-            .body("email", equalTo(email))
-            .body("name", equalTo(name))
-            .body("id", equalTo(userId));
-
-        given()
-            .header("Authorization", "Bearer " + token)
-            .header("content-type", "application/json")
-            .body(updateBodyPerson.jsonString())
-            .log().all()
-            .when()
-            .put("/users/" + userId)
-            .then()
-            .spec(responseSpecificationStatusOk)
-            .body("name", equalTo(nameTwo))
-            .body("id", equalTo(userId));
-
+        UsersService.checkModifyUser(reqModifyBodyForUser,modifyUser);
         //создание, просмотр, апдейт поста
-        given()
+        var reqCreateBodyForPost = generatePostCreateReqBody(modifyUser.getId());
+        var reqModifyBodyForPost = generatePostModifyReqBody(modifyUser.getId());
+        var createdPost = postsService.createPost(reqCreateBodyForPost)
+                                      .then()
+                                      .spec(responseSpecificationStatusCreated)
+                                      .extract()
+                                      .as(PostResponse.class);
+
+        PostsService.checkCreatePost(reqCreateBodyForPost, createdPost);
+
+
+        /*given()
             .header("Authorization", "Bearer " + token)
             .header("content-type", "application/json")
             .body(bodyPost.jsonString())
@@ -87,8 +75,8 @@ public class RestAssuredTests extends BaseApi {
             .post("/posts")
             .then()
             .spec(responseSpecificationStatusCreated)
-            .body("user_id", equalTo(userId));
-
+            .body("user_id", equalTo(userId));*/
+/*
         given()
             .header("Authorization", "Bearer " + token)
             .header("content-type", "application/json")
@@ -143,7 +131,45 @@ public class RestAssuredTests extends BaseApi {
             .delete("/users/" + userId)
             .then()
             .spec(responseSpecificationStatusNoContent)
-            .body(Matchers.emptyString());
+            .body(Matchers.emptyString());*/
     }
-*/
+
+    private CreateUserReq generateUserCreateReqBody() {
+        return CreateUserReq
+            .builder()
+            .name(faker.name().fullName())
+            .email(faker.internet().emailAddress())
+            .gender(gender)
+            .status(status)
+            .build();
+    }
+
+    private UserResponse generateUserModifyReqBody() {
+        return UserResponse
+            .builder()
+            .name(faker.name().fullName())
+            .email(faker.internet().emailAddress())
+            .gender(gender)
+            .status(status)
+            .build();
+    }
+
+    private CreatePostReq generatePostCreateReqBody(Integer userId) {
+        return CreatePostReq
+            .builder()
+            .user_id(userId)
+            .title(faker.lorem().words(3).toString())
+            .body(faker.lorem().sentences(5).toString())
+            .build();
+    }
+
+    private PostResponse generatePostModifyReqBody(Integer userId) {
+        return PostResponse
+            .builder()
+            .user_id(userId)
+            .title(faker.lorem().words(3).toString())
+            .body(faker.lorem().sentences(5).toString())
+            .build();
+    }
+
 }

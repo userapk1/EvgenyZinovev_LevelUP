@@ -1,6 +1,5 @@
 package api.hm6.configuration.data.comments;
 
-import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,7 +11,10 @@ import lombok.ToString;
 @Getter
 @ToString
 @Builder
-public class CommentData {
+public class CreateCommentReq {
 
-    private List<CommentResponse> data;
+    private Integer post_id;
+    private String name;
+    private String email;
+    private String body;
 }
