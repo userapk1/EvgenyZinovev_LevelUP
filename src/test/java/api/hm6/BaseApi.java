@@ -1,24 +1,17 @@
 package api.hm6;
 
 import api.hm6.configuration.ConfigProvider;
-import api.hm6.configuration.data.users.CreateUserReq;
-import api.hm6.configuration.data.users.UserResponse;
 import api.hm6.service.CommentsService;
 import api.hm6.service.PostsService;
 import api.hm6.service.UsersService;
 import com.github.javafaker.Faker;
-import com.jayway.jsonpath.DocumentContext;
-import com.jayway.jsonpath.JsonPath;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
-import java.io.File;
-import java.io.IOException;
 import org.apache.http.HttpStatus;
-import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 
@@ -83,7 +76,5 @@ public abstract class BaseApi {
         usersService = new UsersService(requestSpecification);
         postsService = new PostsService(requestSpecification);
         commentsService = new CommentsService(requestSpecification);
-
     }
-
 }

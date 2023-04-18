@@ -20,7 +20,7 @@ import org.junit.jupiter.api.Test;
 
 public class RestAssuredTests extends BaseApi {
     @BeforeEach
-    public void setUp(){
+    public void setUp() {
         super.setUp();
     }
 
@@ -55,7 +55,7 @@ public class RestAssuredTests extends BaseApi {
                                       .extract()
                                       .as(UserResponse.class);
 
-        UsersService.checkCreateUser(reqBodyForUser,createdUser);
+        UsersService.checkCreateUser(reqBodyForUser, createdUser);
 
         var viewCreatedUser = usersService.getUser(createdUser.getId().toString())
                                       .then()
@@ -68,7 +68,7 @@ public class RestAssuredTests extends BaseApi {
                                       .extract()
                                       .as(UserResponseAfterModify.class);
 
-        UsersService.checkModifyUser(reqModifyBodyForUser,modifyUser);
+        UsersService.checkModifyUser(reqModifyBodyForUser, modifyUser);
 
         //создание, просмотр, апдейт поста
         var reqCreateBodyForPost = generatePostCreateReqBody(modifyUser.getId());
@@ -94,8 +94,10 @@ public class RestAssuredTests extends BaseApi {
         PostsService.checkModifyPost(reqModifyBodyForPost, modifyPost);
 
         //создание, просмотр, апдейт коммента
-        var reqCreateBodyForComment = generateCommentReqBody(modifyPost.getId(), modifyUser.getName(), modifyUser.getEmail());
-        var reqModifyBodyForComment = generateCommentModifyReqBody(modifyPost.getId(), modifyUser.getName(), modifyUser.getEmail());
+        var reqCreateBodyForComment = generateCommentReqBody(modifyPost.getId(),
+            modifyUser.getName(), modifyUser.getEmail());
+        var reqModifyBodyForComment = generateCommentModifyReqBody(modifyPost.getId(),
+            modifyUser.getName(), modifyUser.getEmail());
         var createdComment = commentsService.createComment(reqCreateBodyForComment)
                                       .then()
                                       .spec(responseSpecificationStatusCreated)
