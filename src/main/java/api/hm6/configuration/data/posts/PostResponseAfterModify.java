@@ -1,4 +1,4 @@
-package api.hm6.configuration.data.users;
+package api.hm6.configuration.data.posts;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,10 +11,10 @@ import lombok.ToString;
 @Getter
 @ToString
 @Builder
-public class CreateUserReq {
+public class PostResponseAfterModify {
 
-    private String name;
-    private String email;
-    private String gender;
-    private String status;
+    private Integer id;
+    private Integer user_id;
+    private String title;
+    private String body;
 }

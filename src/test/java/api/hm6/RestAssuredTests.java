@@ -1,9 +1,18 @@
 package api.hm6;
 
+import api.hm6.configuration.data.comments.CommentResponse;
+import api.hm6.configuration.data.comments.CommentResponseAfterModify;
+import api.hm6.configuration.data.comments.CreateCommentReq;
+import api.hm6.configuration.data.comments.PutCommentReq;
 import api.hm6.configuration.data.posts.CreatePostReq;
 import api.hm6.configuration.data.posts.PostResponse;
+import api.hm6.configuration.data.posts.PostResponseAfterModify;
+import api.hm6.configuration.data.posts.PutPostReq;
 import api.hm6.configuration.data.users.CreateUserReq;
+import api.hm6.configuration.data.users.PutUserReq;
 import api.hm6.configuration.data.users.UserResponse;
+import api.hm6.configuration.data.users.UserResponseAfterModify;
+import api.hm6.service.CommentsService;
 import api.hm6.service.PostsService;
 import api.hm6.service.UsersService;
 import org.junit.jupiter.api.BeforeEach;
@@ -30,6 +39,13 @@ public class RestAssuredTests extends BaseApi {
     }
 
     @Test
+    void viewAllComments() {
+        commentsService.viewAllComments()
+                    .then()
+                    .spec(responseSpecificationStatusOk);
+    }
+
+    @Test
     void createViewUpdateDelete() {
         var reqBodyForUser = generateUserCreateReqBody();
         var reqModifyBodyForUser = generateUserModifyReqBody();
@@ -43,17 +59,17 @@ public class RestAssuredTests extends BaseApi {
 
         var viewCreatedUser = usersService.getUser(createdUser.getId().toString())
                                       .then()
-                                      .spec(responseSpecificationStatusOk)
-                                      .extract()
-                                      .as(UserResponse.class);
+                                      .spec(responseSpecificationStatusOk);
+
 
         var modifyUser = usersService.putUser(reqModifyBodyForUser, createdUser.getId().toString())
                                       .then()
                                       .spec(responseSpecificationStatusOk)
                                       .extract()
-                                      .as(UserResponse.class);
+                                      .as(UserResponseAfterModify.class);
 
         UsersService.checkModifyUser(reqModifyBodyForUser,modifyUser);
+
         //создание, просмотр, апдейт поста
         var reqCreateBodyForPost = generatePostCreateReqBody(modifyUser.getId());
         var reqModifyBodyForPost = generatePostModifyReqBody(modifyUser.getId());
@@ -65,73 +81,53 @@ public class RestAssuredTests extends BaseApi {
 
         PostsService.checkCreatePost(reqCreateBodyForPost, createdPost);
 
+        var viewCreatedPost = postsService.getPost(createdPost.getId().toString())
+                                          .then()
+                                          .spec(responseSpecificationStatusOk);
 
-        /*given()
-            .header("Authorization", "Bearer " + token)
-            .header("content-type", "application/json")
-            .body(bodyPost.jsonString())
-            .log().all()
-            .when()
-            .post("/posts")
+        var modifyPost = postsService.putPost(reqModifyBodyForPost, createdPost.getId().toString())
+                                     .then()
+                                     .spec(responseSpecificationStatusOk)
+                                     .extract()
+                                     .as(PostResponseAfterModify.class);
+
+        PostsService.checkModifyPost(reqModifyBodyForPost, modifyPost);
+
+        //создание, просмотр, апдейт коммента
+        var reqCreateBodyForComment = generateCommentReqBody(modifyPost.getId(), modifyUser.getName(), modifyUser.getEmail());
+        var reqModifyBodyForComment = generateCommentModifyReqBody(modifyPost.getId(), modifyUser.getName(), modifyUser.getEmail());
+        var createdComment = commentsService.createComment(reqCreateBodyForComment)
+                                      .then()
+                                      .spec(responseSpecificationStatusCreated)
+                                      .extract()
+                                      .as(CommentResponse.class);
+
+        CommentsService.checkCreateComment(reqCreateBodyForComment, createdComment);
+
+        var viewCreatedComment = commentsService.getComment(createdComment.getId().toString())
+                                          .then()
+                                          .spec(responseSpecificationStatusOk);
+
+        var modifyComment = commentsService.putComment(reqModifyBodyForComment, createdComment.getId().toString())
+                                     .then()
+                                     .spec(responseSpecificationStatusOk)
+                                     .extract()
+                                     .as(CommentResponseAfterModify.class);
+
+        CommentsService.checkModifyComment(reqModifyBodyForComment, modifyComment);
+
+        //удаление коммента, поста, юзера
+        commentsService.deleteComment(createdComment.getId().toString())
+                      .then()
+                      .spec(responseSpecificationStatusNoContent);
+
+        postsService.deletePost(createdPost.getId().toString())
             .then()
-            .spec(responseSpecificationStatusCreated)
-            .body("user_id", equalTo(userId));*/
-/*
-        given()
-            .header("Authorization", "Bearer " + token)
-            .header("content-type", "application/json")
-            .log().all()
-            .when()
-            .get("/post/" + id)
+            .spec(responseSpecificationStatusNoContent);
+
+        usersService.deleteUser(createdUser.getId().toString())
             .then()
-            .spec(responseSpecificationStatusOk)
-            .body("user_id", equalTo(userId))
-            .body("id", equalTo(id));
-
-        given()
-            .header("Authorization", "Bearer " + token)
-            .header("content-type", "application/json")
-            .body(updateBodyPost.jsonString())
-            .log().all()
-            .when()
-            .put("/post/" + id)
-            .then()
-            .spec(responseSpecificationStatusOk)
-            .body("user_id", equalTo(userIdTwo))
-            .body("id", equalTo(id));
-
-
-
-
-
-
-
-
-
-
-
-
-        //удаление поста
-        given()
-            .header("Authorization", "Bearer " + token)
-            .header("content-type", "application/json")
-            .log().all()
-            .when()
-            .delete("/post/" + id)
-            .then()
-            .spec(responseSpecificationStatusNoContent)
-            .body(Matchers.emptyString());
-
-        //удаление пользователя
-        given()
-            .header("Authorization", "Bearer " + token)
-            .header("content-type", "application/json")
-            .log().all()
-            .when()
-            .delete("/users/" + userId)
-            .then()
-            .spec(responseSpecificationStatusNoContent)
-            .body(Matchers.emptyString());*/
+            .spec(responseSpecificationStatusNoContent);
     }
 
     private CreateUserReq generateUserCreateReqBody() {
@@ -144,8 +140,8 @@ public class RestAssuredTests extends BaseApi {
             .build();
     }
 
-    private UserResponse generateUserModifyReqBody() {
-        return UserResponse
+    private PutUserReq generateUserModifyReqBody() {
+        return PutUserReq
             .builder()
             .name(faker.name().fullName())
             .email(faker.internet().emailAddress())
@@ -163,11 +159,31 @@ public class RestAssuredTests extends BaseApi {
             .build();
     }
 
-    private PostResponse generatePostModifyReqBody(Integer userId) {
-        return PostResponse
+    private PutPostReq generatePostModifyReqBody(Integer userId) {
+        return PutPostReq
             .builder()
             .user_id(userId)
             .title(faker.lorem().words(3).toString())
+            .body(faker.lorem().sentences(5).toString())
+            .build();
+    }
+
+    private CreateCommentReq generateCommentReqBody(Integer postId, String name, String email) {
+        return CreateCommentReq
+            .builder()
+            .post_id(postId)
+            .name(name)
+            .email(email)
+            .body(faker.lorem().sentences(5).toString())
+            .build();
+    }
+
+    private PutCommentReq generateCommentModifyReqBody(Integer postId, String name, String email) {
+        return PutCommentReq
+            .builder()
+            .post_id(postId)
+            .name(name)
+            .email(email)
             .body(faker.lorem().sentences(5).toString())
             .build();
     }

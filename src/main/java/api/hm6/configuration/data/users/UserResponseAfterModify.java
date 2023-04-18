@@ -11,8 +11,9 @@ import lombok.ToString;
 @Getter
 @ToString
 @Builder
-public class CreateUserReq {
+public class UserResponseAfterModify {
 
+    private Integer id;
     private String name;
     private String email;
     private String gender;

@@ -5,6 +5,8 @@ import static io.restassured.RestAssured.given;
 import api.hm6.BaseApi;
 import api.hm6.configuration.data.posts.CreatePostReq;
 import api.hm6.configuration.data.posts.PostResponse;
+import api.hm6.configuration.data.posts.PostResponseAfterModify;
+import api.hm6.configuration.data.posts.PutPostReq;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import lombok.RequiredArgsConstructor;
@@ -37,7 +39,7 @@ public class PostsService extends BaseApi {
             .andReturn();
     }
 
-    public Response putPost(PostResponse request, final String id) {
+    public Response putPost(PutPostReq request, final String id) {
         return given(requestSpecification)
             .body(request)
             .when()
@@ -62,7 +64,7 @@ public class PostsService extends BaseApi {
         });
     }
 
-    public static void checkModifyPost(PostResponse request, PostResponse actualResponse) {
+    public static void checkModifyPost(PutPostReq request, PostResponseAfterModify actualResponse) {
         SoftAssertions.assertSoftly(softAssertions -> {
             softAssertions.assertThat(actualResponse.getId()).isNotNull();
             softAssertions.assertThat(actualResponse.getTitle())
