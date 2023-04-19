@@ -76,9 +76,12 @@ public  class ExerciseOne extends BaseSeleniumTest {
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
             "//div[contains(@class, 'application-mail__layout')]//a[contains(@title, 'Отправленные')]"))).click();
 
+        SleepUtils.sleep(1000);
         int emailsInSent = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(
             "//*[@class='ReactVirtualized__Grid__innerScrollContainer']/a"))).size();
-        //System.out.println(emailsInSent);
+
+        System.out.println(emailsInSent);
+
 
         //cмотрим скока записей в черновиках
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
@@ -107,6 +110,7 @@ public  class ExerciseOne extends BaseSeleniumTest {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By
                 .xpath("//div[contains(@class, 'editable')]/div/div[2]")))
             .sendKeys(bodyLetter);
+
 
         SleepUtils.sleep(1000);
         //сохраняем черновик
@@ -165,7 +169,9 @@ public  class ExerciseOne extends BaseSeleniumTest {
         SleepUtils.sleep(1000);
         int emailsInSent2 = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(
             "//*[@class='ReactVirtualized__Grid__innerScrollContainer']/a"))).size();
+
         //System.out.println(emailsInSent2);
+
         Assertions.assertThat(emailsInSent < emailsInSent2).isTrue();
 
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
