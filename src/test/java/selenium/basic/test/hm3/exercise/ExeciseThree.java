@@ -95,7 +95,9 @@ public class ExeciseThree extends BaseSeleniumTest {
         //отправили и закрыли фрейм
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
             "//div[contains(@class, 'footer')]//button[contains(@data-test-id, 'send')]"))).click();
+
         SleepUtils.sleep(1000);
+
         //close frame
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
             "//div[contains(@class, 'layer layer')]//span[@class='button2__wrapper button2__wrapper_centered']")))
