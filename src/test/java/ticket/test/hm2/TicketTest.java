@@ -12,70 +12,44 @@ public class TicketTest extends BaseTicketTest {
 
 
     //POSITIVE
-
     @ParameterizedTest
     @MethodSource("ticket.test.hm2.TicketTestDataProvider#dataProviderTrue")
     @PositiveTag
     @SuiteAllTag
-     void isItHappyTrue(String input) {
-        var expected = new String("true");
-        var actual = ticket.sumNumb(input);
-
-        Assertions.assertEquals(expected, actual);
+     void isItHappyTrue(int input) {
+        Assertions.assertTrue(ticket.sumNumb(input));
     }
 
     @ParameterizedTest
     @MethodSource("ticket.test.hm2.TicketTestDataProvider#dataProviderFalse")
     @PositiveTag
     @SuiteAllTag
-    void isItHappyFalse(String input) {
-        var expected = new String("false");
-        var actual = ticket.sumNumb(input);
-
-        Assertions.assertEquals(expected, actual);
+    void isItHappyFalse(int input) {
+        Assertions.assertFalse(ticket.sumNumb(input));
     }
 
-
     //NEGATIVE
-
     @ParameterizedTest
     @NullSource
     @NegativeTag
     @SuiteAllTag
-    void isItHappyExc1(String input) {
-
-        Assertions.assertThrows(NullPointerException.class,
-            () -> ticket.sumNumb(input));
+    void isItHappyExc1(Integer input) {
+        Assertions.assertThrows(NullPointerException.class, () -> ticket.sumNumb(input));
     }
 
     @ParameterizedTest
     @MethodSource("ticket.test.hm2.TicketTestDataProvider#dataProviderLessSix")
     @NegativeTag
     @SuiteAllTag
-    void isItHappyLessSix(String input) {
-        var actual = ticket.sumNumb(input);
-
-        Assertions.assertEquals(expected, actual);
+    void isItHappyLessSix(int input) {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> ticket.sumNumb(input));
     }
 
     @ParameterizedTest
     @MethodSource("ticket.test.hm2.TicketTestDataProvider#dataProviderMoreSix")
     @NegativeTag
     @SuiteAllTag
-    void isItHappyMoreSix(String input) {
-        var actual = ticket.sumNumb(input);
-
-        Assertions.assertEquals(expected, actual);
+    void isItHappyMoreSix(int input) {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> ticket.sumNumb(input));
     }
-
-    @ParameterizedTest
-    @MethodSource("ticket.test.hm2.TicketTestDataProvider#dataProviderLetter")
-    @NegativeTag
-    @SuiteAllTag
-    void isItHappyLetterInput(String input) {
-        var actual = ticket.sumNumb(input);
-
-        Assertions.assertEquals(expected, actual);
-    }
-
 }
