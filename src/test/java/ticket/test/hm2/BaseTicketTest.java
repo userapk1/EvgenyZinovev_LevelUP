@@ -11,8 +11,7 @@ public class BaseTicketTest {
     @BeforeEach
     void setUp() {
         //System.out.println(this.getClass().getName()+"before each");
-        ticket = new TicketImpl();
-        expected = new String("Номер билета должен состоять из 6 цифр");
+        ticket = new TicketImpl() {};
     }
 
     @AfterEach

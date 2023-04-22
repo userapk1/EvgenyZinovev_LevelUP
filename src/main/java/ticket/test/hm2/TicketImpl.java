@@ -1,27 +1,20 @@
 package ticket.test.hm2;
 
-public class TicketImpl implements Ticket {
+public abstract class TicketImpl implements Ticket {
 
     @Override
-    public String sumNumb(String input) {
-
-        if (input.length() == 6) {
-            char one = input.charAt(0);
-            char two = input.charAt(1);
-            char three = input.charAt(2);
-            char four = input.charAt(3);
-            char five = input.charAt(4);
-            char six = input.charAt(5);
-            int sum1 = one + two + three;
-            int sum2 = four + five + six;
-            if (sum1 == sum2) {
-                return "true";
-            }
-            return "false";
+    public boolean sumNumb(Integer input) {
+        if (input == null) {
+            throw new NullPointerException("Значение не может быть пустым");
         }
-
-        return "Номер билета должен состоять из 6 цифр";
+        if (input <= 99999) {
+            throw new IllegalArgumentException("В номере билета должно быть 6 цифр");
+        }
+        if (input > 999999) {
+            throw new IllegalArgumentException("В номере билета должно быть 6 цифр");
+        }
+        return ((input % 10) + (input / 10) % 10 + (input / 100) % 10 ==
+            (input / 1000) % 10 + (input / 10000) % 10 + (input / 100000) % 10);
     }
-
-
 }
+

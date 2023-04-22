@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Tag;
 
 @Target({ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
-@Tag("Negative_Tag")
-public @interface NegativeTag {
-
+@Tag("SuiteAll_tag")
+public @interface SuiteAllTag {
 }
