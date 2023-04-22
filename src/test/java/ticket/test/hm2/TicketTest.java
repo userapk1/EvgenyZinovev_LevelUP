@@ -16,7 +16,7 @@ public class TicketTest extends BaseTicketTest {
     @MethodSource("ticket.test.hm2.TicketTestDataProvider#dataProviderTrue")
     @PositiveTag
     @SuiteAllTag
-     void isItHappyTrue(int input) {
+     void isItHappyTrue(Integer input) {
         Assertions.assertTrue(ticket.sumNumb(input));
     }
 
@@ -24,7 +24,7 @@ public class TicketTest extends BaseTicketTest {
     @MethodSource("ticket.test.hm2.TicketTestDataProvider#dataProviderFalse")
     @PositiveTag
     @SuiteAllTag
-    void isItHappyFalse(int input) {
+    void isItHappyFalse(Integer input) {
         Assertions.assertFalse(ticket.sumNumb(input));
     }
 
@@ -41,7 +41,7 @@ public class TicketTest extends BaseTicketTest {
     @MethodSource("ticket.test.hm2.TicketTestDataProvider#dataProviderLessSix")
     @NegativeTag
     @SuiteAllTag
-    void isItHappyLessSix(int input) {
+    void isItHappyLessSix(Integer input) {
         Assertions.assertThrows(IllegalArgumentException.class, () -> ticket.sumNumb(input));
     }
 
@@ -49,7 +49,7 @@ public class TicketTest extends BaseTicketTest {
     @MethodSource("ticket.test.hm2.TicketTestDataProvider#dataProviderMoreSix")
     @NegativeTag
     @SuiteAllTag
-    void isItHappyMoreSix(int input) {
+    void isItHappyMoreSix(Integer input) {
         Assertions.assertThrows(IllegalArgumentException.class, () -> ticket.sumNumb(input));
     }
 }

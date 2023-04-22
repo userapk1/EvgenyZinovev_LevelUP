@@ -19,5 +19,4 @@ public class TicketTestDataProvider {
     static Stream<Arguments> dataProviderMoreSix() {
         return Stream.of(Arguments.of(12222133));
     }
-
 }
