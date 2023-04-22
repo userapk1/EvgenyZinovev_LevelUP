@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>ru.levelp.at</groupId>
@@ -21,20 +21,26 @@
         <maven-checkstyle-plugin.version>3.2.0</maven-checkstyle-plugin.version>
         <maven-surefire-plugin.version>3.0.0-M8</maven-surefire-plugin.version>
         <junit-jupiter-engine.version>5.9.2</junit-jupiter-engine.version>
-        <junit-platform-suite.version>1.9.2</junit-platform-suite.version>
+        <selenium-java.version>4.8.1</selenium-java.version>
+        <assertj-core.version>3.24.2</assertj-core.version>
+        <javafaker.version>1.0.2</javafaker.version>
+        <owner.version>1.0.12</owner.version>
+        <rest.assured.version>5.3.0</rest.assured.version>
+        <jsonpath.version>2.7.0</jsonpath.version>
+        <jackson.version>2.14.2</jackson.version>
 
     </properties>
 
     <profiles>
-    <profile>
-        <id>negative-suite</id>
-        <properties>
-            <class.name>**/NegativeSuite.class</class.name>
-        </properties>
-        <activation>
-            <activeByDefault>true</activeByDefault>
-        </activation>
-    </profile>
+        <profile>
+            <id>negative-suite</id>
+            <properties>
+                <class.name>**/NegativeSuite.class</class.name>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
 
         <profile>
             <id>positive-suite</id>
@@ -49,6 +55,24 @@
                 <class.name>**/SuiteAll.class</class.name>
             </properties>
         </profile>
+         <!-- для 4 домашки-->
+       <!-- <profile>
+            <id>all-test-selenium</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <suite.class>**/hm3/exercise/*.class</suite.class>
+            </properties>
+        </profile> -->
+
+        <profile>
+            <id>all-test-selenium-hm4</id>
+            <properties>
+                <suite.class>**/hm4/*.class</suite.class>
+            </properties>
+        </profile>
+
     </profiles>
 
 
@@ -80,10 +104,58 @@
         </dependency>
 
         <dependency>
-            <groupId>org.junit.platform</groupId>
-            <artifactId>junit-platform-suite</artifactId>
-            <version>${junit-platform-suite.version}</version>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>${selenium-java.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertj-core.version}</version>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.javafaker</groupId>
+            <artifactId>javafaker</artifactId>
+            <version>${javafaker.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>3.24.2</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.aeonbits.owner</groupId>
+            <artifactId>owner</artifactId>
+            <version>${owner.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>RELEASE</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>${rest.assured.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.jayway.jsonpath</groupId>
+            <artifactId>json-path</artifactId>
+            <version>${jsonpath.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
         </dependency>
 
     </dependencies>
@@ -126,15 +198,22 @@
             </plugin>
 
             <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <version>${maven-surefire-plugin.version}</version>
-            <configuration>
-              <includes>
-                      <include>${class.name}</include>
-              </includes>
-                <!--<skip>true</skip>-->
-            </configuration>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-surefire-plugin.version}</version>
+                <!--для 4 домашки -->
+                <!--<configuration>
+                    <includes>
+                        <include>${suite.class}</include>
+                    </includes>
+                </configuration>-->
+
+                <configuration>
+                    <includes>
+                        <include>${class.name}</include>
+                    </includes>
+                    <!--<skip>true</skip>-->
+                </configuration>
             </plugin>
 
 
