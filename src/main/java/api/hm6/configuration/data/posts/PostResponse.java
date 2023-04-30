@@ -14,6 +14,7 @@ import lombok.ToString;
 public class PostResponse {
 
     private Integer id;
+    @SuppressWarnings("checkstyle:MemberName")
     private Integer user_id;
     private String title;
     private String body;

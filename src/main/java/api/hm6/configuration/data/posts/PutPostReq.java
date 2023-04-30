@@ -12,7 +12,7 @@ import lombok.ToString;
 @ToString
 @Builder
 public class PutPostReq {
-
+    @SuppressWarnings("checkstyle:MemberName")
     private Integer user_id;
     private String title;
     private String body;

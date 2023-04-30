@@ -14,6 +14,7 @@ import lombok.ToString;
 public class CommentResponseAfterModify {
 
     private Integer id;
+    @SuppressWarnings("checkstyle:MemberName")
     private Integer post_id;
     private String name;
     private String email;

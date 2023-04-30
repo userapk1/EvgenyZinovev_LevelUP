@@ -12,7 +12,7 @@ import lombok.ToString;
 @ToString
 @Builder
 public class CreateCommentReq {
-
+    @SuppressWarnings("checkstyle:MemberName")
     private Integer post_id;
     private String name;
     private String email;
