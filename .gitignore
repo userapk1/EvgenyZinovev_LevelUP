@@ -18,6 +18,8 @@ etc.
 .vcs.xml
 .misc.xml
 .checkstyle-idea.xml
+target/allure-results
+.allure
 
 
 ### Eclipse ###
