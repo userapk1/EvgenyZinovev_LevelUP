@@ -1,4 +1,4 @@
-package selenium.page.object.hm4;
+package allure.jenkins.hm7;
 
 import java.time.Duration;
 import java.util.List;
@@ -97,7 +97,7 @@ public class IndexPage extends UtilsForHm4 {
     @FindBy(xpath = "//div[contains(@class, 'ph-auth')]//div[contains(@class, 'ph-project__account')]")
     private WebElement logoutButton1;
 
-    @FindBy(xpath = "//div[contains(@class, 'ph-item__social')]/div[contains(@class, 'ph-text')]")
+    @FindBy(xpath = "//div[contains(@class, 'ph-item__hover-active')]/div[contains(@class, 'ph-text')]")
     private WebElement logoutButton2;
 
     @FindBy(xpath = "//div[contains(@class, 'sidebar__header')]//span[@class='sidebar__menu-ico']")
