@@ -14,7 +14,7 @@ public class AllureAttachmentReport implements AfterTestExecutionCallback {
     public void afterTestExecution(ExtensionContext context) throws Exception {
         System.out.println("afterTestExecution");
         if (context.getExecutionException().isPresent()) {
-            System.out.println("Делаем скриншот");
+            System.out.println("Сделан скриншот");
             attach();
         }
     }
