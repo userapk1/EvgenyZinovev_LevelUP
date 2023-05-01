@@ -20,6 +20,7 @@ public class Steps extends BasePage{
         PageFactory.initElements(driver, this);
     }
 
+    @Step("Открытие домашней страницы")
     public void openHomePage() {
         loginRegistrationPage.open();
     }
@@ -37,7 +38,7 @@ public class Steps extends BasePage{
     }
 
     @Step("Проверка авторизации на успех")
-    public void checkAuthorizationForSuccess() {
+    public void checkOfSuccessAuthorization() {
         var num = indexPage.getLayoutColumnLeft();
         Assertions.assertThat(num).isEqualTo(7);
         SleepUtils.sleep(1000);
@@ -73,6 +74,7 @@ public class Steps extends BasePage{
 
     @Step("Проверка на соответствие полей 'Кому', 'Тема' и тела письма")
     public void checkOfFilledFieldsInScenarioOne(String destination, String subject, String bodyLetter) {
+        indexPage.clickLastLetter();
         var checkFieldTo = indexPage.getToFieldInside();
         Assertions.assertThat(destination).isEqualTo(checkFieldTo);
         var checkFieldSubject = indexPage.getSubjectFieldInside();
@@ -130,6 +132,7 @@ public class Steps extends BasePage{
         Assertions.assertThat(checkFieldBody).contains(bodyLetter);
     }
 
+    //сценарий3
     @Step("Формирование, отправка письма себе, и проверка отправления письма")
     public void formingAndSendingLetterToYourselfForScenarioThree(String letterForMe, String subject, String bodyLetter) {
         indexPage.clickFolderToMyselfLetter();
