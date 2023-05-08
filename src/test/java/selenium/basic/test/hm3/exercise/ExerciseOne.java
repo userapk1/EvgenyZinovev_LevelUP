@@ -79,7 +79,7 @@ public  class ExerciseOne extends BaseSeleniumTest {
         SleepUtils.sleep(1000);
         int emailsInSent = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(
             "//*[@class='ReactVirtualized__Grid__innerScrollContainer']/a"))).size();
-        System.out.println(emailsInSent);
+        //System.out.println(emailsInSent);
 
         //cмотрим скока записей в черновиках
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
@@ -167,7 +167,9 @@ public  class ExerciseOne extends BaseSeleniumTest {
         SleepUtils.sleep(1000);
         int emailsInSent2 = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(
             "//*[@class='ReactVirtualized__Grid__innerScrollContainer']/a"))).size();
-        System.out.println(emailsInSent2);
+
+        //System.out.println(emailsInSent2);
+
         Assertions.assertThat(emailsInSent < emailsInSent2).isTrue();
 
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
@@ -175,7 +177,6 @@ public  class ExerciseOne extends BaseSeleniumTest {
 
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
             "//div[contains(@class, 'ph-item__hover-active')]/div[contains(@class, 'ph-text')]"))).click();
-        SleepUtils.sleep(3000);
     }
 
 
