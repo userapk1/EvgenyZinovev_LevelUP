@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 @Feature("Сценарии в портале mail.ru")
 @DisplayName("Четыре сценария с формированием, сохранением, отправкой, удалением письма и неудачной авторизацией")
-public class SeleniumStepDesignTest extends BasePage{
+public class SeleniumStepDesignTest extends BasePage {
     private Steps steps;
 
     @Override
@@ -24,7 +24,7 @@ public class SeleniumStepDesignTest extends BasePage{
         steps.openHomePage();
         steps.logIn(login, pass);
         steps.checkOfSuccessAuthorization();
-        steps.formingAndSavingADraft(destination,subject,bodyLetter);
+        steps.formingAndSavingADraft(destination, subject, bodyLetter);
         steps.checkOfFilledFieldsInScenarioOne(destination, subject, bodyLetter);
         steps.sendingLetter();
         steps.logOut();
@@ -47,7 +47,7 @@ public class SeleniumStepDesignTest extends BasePage{
         steps.openHomePage();
         steps.logIn(login, pass);
         steps.checkOfSuccessAuthorization();
-        steps.formingAndSendingLetterToYourselfForScenarioThree(letterForMe,subject, bodyLetter);
+        steps.formingAndSendingLetterToYourselfForScenarioThree(letterForMe, subject, bodyLetter);
         steps.checkOfFilledFieldsInScenarioThree(letterForMe, subject, bodyLetter);
         steps.deleteLetter();
         steps.logOut();
@@ -57,6 +57,6 @@ public class SeleniumStepDesignTest extends BasePage{
     @Story("Неудачная авторизация")
     void failedAuthorization() {
         steps.openHomePage();
-        steps.logIn(login+1, pass);
+        steps.logIn(login + 1, pass);
     }
 }

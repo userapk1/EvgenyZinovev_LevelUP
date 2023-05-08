@@ -7,7 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 import utils.SleepUtils;
 import utils.UtilsForHm4;
 
-public class Steps extends BasePage{
+public class Steps extends BasePage {
 
     private final IndexPage indexPage;
     private final LoginRegistrationPage loginRegistrationPage;
@@ -94,7 +94,8 @@ public class Steps extends BasePage{
 
     //сценарий2
     @Step("Формирование, отправка письма, и проверка отправления письма")
-    public void formingAndSendingLetterToYourselfForScenarioTwo(String letterForMe, String subjectForMe, String bodyLetter) {
+    public void formingAndSendingLetterToYourselfForScenarioTwo(String letterForMe, String subjectForMe,
+                                                                String bodyLetter) {
         indexPage.clickLeftSideMenu();
         indexPage.clickTestButtonInLayoutColumn();
         SleepUtils.sleep(1000);
@@ -134,7 +135,8 @@ public class Steps extends BasePage{
 
     //сценарий3
     @Step("Формирование, отправка письма себе, и проверка отправления письма")
-    public void formingAndSendingLetterToYourselfForScenarioThree(String letterForMe, String subject, String bodyLetter) {
+    public void formingAndSendingLetterToYourselfForScenarioThree(String letterForMe,
+                                                                  String subject, String bodyLetter) {
         indexPage.clickFolderToMyselfLetter();
         SleepUtils.sleep(1000);
         final var emailsBeforeSendingInToMyself = indexPage.getEmailInToMyself();

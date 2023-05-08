@@ -54,6 +54,13 @@
             </properties>
         </profile>
 
+        <profile>
+            <id>all-test-selenium-hm7</id>
+            <properties>
+                <suite.class>**/hm7/*.class</suite.class>
+            </properties>
+        </profile>
+
     </profiles>
 
 
