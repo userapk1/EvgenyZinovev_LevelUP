@@ -24,6 +24,16 @@
         <selenium-java.version>4.8.1</selenium-java.version>
         <assertj-core.version>3.24.2</assertj-core.version>
         <javafaker.version>1.0.2</javafaker.version>
+        <owner.version>1.0.12</owner.version>
+        <rest.assured.version>5.3.0</rest.assured.version>
+        <jsonpath.version>2.7.0</jsonpath.version>
+        <jackson.version>2.14.2</jackson.version>
+        <allure.version>2.21.0</allure.version>
+        <allure-maven.version>2.12.0</allure-maven.version>
+        <jcommander.version>1.82</jcommander.version>
+        <aspectj.version>1.9.19</aspectj.version>
+
+
     </properties>
 
     <profiles>
@@ -36,6 +46,20 @@
             <suite.class>**/hm3/exercise/*.class</suite.class>
         </properties>
     </profile>
+
+        <profile>
+            <id>all-test-selenium-hm4</id>
+            <properties>
+                <suite.class>**/hm4/*.class</suite.class>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>all-test-selenium-hm7</id>
+            <properties>
+                <suite.class>**/hm7/*.class</suite.class>
+            </properties>
+        </profile>
 
     </profiles>
 
@@ -85,7 +109,55 @@
             <artifactId>javafaker</artifactId>
             <version>${javafaker.version}</version>
         </dependency>
+       <!-- <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>3.24.2</version>
+            <scope>compile</scope>
+        </dependency> -->
 
+        <dependency>
+            <groupId>org.aeonbits.owner</groupId>
+            <artifactId>owner</artifactId>
+            <version>${owner.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.26</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>${rest.assured.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.jayway.jsonpath</groupId>
+            <artifactId>json-path</artifactId>
+            <version>${jsonpath.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-junit5</artifactId>
+            <version>${allure.version}</version>
+            <!--<scope>test</scope>-->
+        </dependency>
+
+        <dependency>
+            <groupId>com.beust</groupId>
+            <artifactId>jcommander</artifactId>
+            <version>${jcommander.version}</version>
+        </dependency>
 
     </dependencies>
 
@@ -131,12 +203,27 @@
             <artifactId>maven-surefire-plugin</artifactId>
             <version>${maven-surefire-plugin.version}</version>
             <configuration>
+                <argLine>
+                    -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                </argLine>
               <includes>
                       <include>${suite.class}</include>
               </includes>
             </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjweaver</artifactId>
+                        <version>${aspectj.version}</version>
+                    </dependency>
+                </dependencies>
             </plugin>
 
+            <plugin>
+                    <groupId>io.qameta.allure</groupId>
+                    <artifactId>allure-maven</artifactId>
+                    <version>${allure-maven.version}</version>
+            </plugin>
 
         </plugins>
     </build>

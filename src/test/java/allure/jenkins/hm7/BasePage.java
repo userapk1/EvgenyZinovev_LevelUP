@@ -1,11 +1,12 @@
-package selenium.basic.test.hm3;
+package allure.jenkins.hm7;
 
+import allure.jenkins.hm7.listener.AllureAttachmentReport;
+import allure.jenkins.hm7.listener.TestContext;
 import com.github.javafaker.Faker;
-import java.io.IOException;
 import java.time.Duration;
-import java.util.Properties;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -13,12 +14,12 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import selenium.page.object.hm4.configuration.ConfigProvider;
 
-public abstract class BaseSeleniumTest {
-    /*private static Properties properties;*/
+@ExtendWith({AllureAttachmentReport.class})
+public abstract class BasePage {
+
     protected static final String URL = "https://mail.ru";
-    protected static final String login = "test.lvlup";
-    protected final String login11 = ConfigProvider.staticVeriables().getLogin();
-    protected static final String pass = "klik_1360";
+    protected final String login = ConfigProvider.staticVeriables().getLogin();
+    protected static final String pass = ConfigProvider.staticVeriables().getPass();
     protected static final String destination = "test@mail.ru";
     protected static final String letterForMe = "test.lvlup@mail.ru";
     protected static final String subject = "test";
@@ -27,8 +28,6 @@ public abstract class BaseSeleniumTest {
     protected WebDriver driver;
     protected WebDriverWait wait;
     protected Faker faker;
-    /*public static final String PATH_TO_PROPERTIES = "/config.properties";*/
-
 
     @BeforeEach
         public void setUp() {
@@ -38,13 +37,13 @@ public abstract class BaseSeleniumTest {
         driver = new ChromeDriver(options);
         wait = new WebDriverWait(driver, Duration.ofMillis(10000));
         PageFactory.initElements(driver, this);
-
+        TestContext.getInstance().addObject("driver", driver);
     }
-
 
     @AfterEach
         public void tearDown() {
         driver.quit();
+        TestContext.clear();
     }
 }
 

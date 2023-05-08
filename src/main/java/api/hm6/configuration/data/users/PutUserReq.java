@@ -1,0 +1,21 @@
+package api.hm6.configuration.data.users;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@ToString
+@Builder
+
+public class PutUserReq {
+
+    private String name;
+    private String email;
+    private String gender;
+    private String status;
+}
