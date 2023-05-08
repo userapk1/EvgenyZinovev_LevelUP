@@ -33,7 +33,7 @@ public class Steps extends BasePage {
         loginRegistrationPage.clickNextButton();
         loginRegistrationPage.fillPassTextField(password);
         loginRegistrationPage.clickLoginButton2();
-        SleepUtils.sleep(1000);
+        /*SleepUtils.sleep(1000);*/
         utils.switchToCurrentPage();
     }
 
@@ -41,7 +41,7 @@ public class Steps extends BasePage {
     public void checkOfSuccessAuthorization() {
         var num = indexPage.getLayoutColumnLeft();
         Assertions.assertThat(num).isEqualTo(7);
-        SleepUtils.sleep(1000);
+        /*SleepUtils.sleep(1000);*/
     }
 
     @Step("Логаут")
@@ -54,10 +54,10 @@ public class Steps extends BasePage {
     @Step("Формирование, сохранение письма, и проверка сохранения черновика")
     public void formingAndSavingADraft(String destination, String subject, String bodyLetter) {
         indexPage.clickSentButtonInLayoutColumn();
-        SleepUtils.sleep(1000);
+        /*SleepUtils.sleep(1000);*/
         final var emailsBeforeSendingInSent = indexPage.getEmailInSent();
         indexPage.clickDraftsButtonInLayoutColumn();
-        SleepUtils.sleep(1000);
+        /*SleepUtils.sleep(1000);*/
         final var emailsBeforeSaveInDrafts = indexPage.getEmailInDrafts();
         indexPage.clickWriteALetterButton();
         indexPage.fillToField(destination);
@@ -65,7 +65,7 @@ public class Steps extends BasePage {
         indexPage.fillBodyField(bodyLetter);
         indexPage.clickSaveButton();
         indexPage.clickCloseFrameButton();
-        SleepUtils.sleep(1000);
+        /*SleepUtils.sleep(1000);*/
         var emailsAfterSaveInDrafts = indexPage.getEmailInDrafts();
         /*System.out.println(emailsBeforeSaveInDrafts);
         System.out.println(emailsAfterSaveInDrafts);*/
@@ -79,17 +79,17 @@ public class Steps extends BasePage {
         Assertions.assertThat(destination).isEqualTo(checkFieldTo);
         var checkFieldSubject = indexPage.getSubjectFieldInside();
         Assertions.assertThat(subject).isEqualTo(checkFieldSubject);
-        SleepUtils.sleep(1000);
+        /*SleepUtils.sleep(1000);*/
         var checkFieldBody = indexPage.getBodyFieldInside();
         Assertions.assertThat(checkFieldBody).contains(bodyLetter);
-        SleepUtils.sleep(1000);
+        /*SleepUtils.sleep(1000);*/
     }
 
     @Step("Отправка письма")
     public void sendingLetter() {
         indexPage.clickSendButtonInOpenLetter();
         indexPage.clickCloseFrameButton2();
-        SleepUtils.sleep(1000);
+        /*SleepUtils.sleep(1000);*/
     }
 
     //сценарий2
@@ -98,10 +98,10 @@ public class Steps extends BasePage {
                                                                 String bodyLetter) {
         indexPage.clickLeftSideMenu();
         indexPage.clickTestButtonInLayoutColumn();
-        SleepUtils.sleep(1000);
+        /*SleepUtils.sleep(1000);*/
         final var emailsBeforeSendingInTest = indexPage.getEmailInTests();
         indexPage.clickSentButtonInLayoutColumn();
-        SleepUtils.sleep(1000);
+        /*SleepUtils.sleep(1000);*/
         final var emailsBeforeSendingInSent = indexPage.getEmailInSent();
         indexPage.clickWriteALetterButton();
         indexPage.fillToField(letterForMe);
@@ -109,12 +109,12 @@ public class Steps extends BasePage {
         indexPage.fillBodyField(bodyLetter);
         indexPage.clickSendButtonInOpenLetter();
         indexPage.clickCloseFrameButton2();
-        SleepUtils.sleep(1000);
+        /*SleepUtils.sleep(1000);*/
         var emailsAfterSendingInSent = indexPage.getEmailInSent();
         Assertions.assertThat(emailsBeforeSendingInSent < emailsAfterSendingInSent).isTrue();
         indexPage.clickLeftSideMenu();
         indexPage.clickTestButtonInLayoutColumn();
-        SleepUtils.sleep(1000);
+        /*SleepUtils.sleep(1000);*/
         var emailsAfterSendingInTest = indexPage.getEmailInTests();
         Assertions.assertThat(emailsBeforeSendingInTest < emailsAfterSendingInTest).isTrue();
     }
@@ -122,13 +122,13 @@ public class Steps extends BasePage {
     @Step("Проверка на соответствие полей 'Кому', 'Тема' и тела письма")
     public void checkOfFilledFieldsInScenarioTwo(String letterForMe, String subjectForMe, String bodyLetter) {
         indexPage.clickLastLetter();
-        SleepUtils.sleep(1000);
+        /*SleepUtils.sleep(1000);*/
         var checkFieldTo = indexPage.getToFieldInsideInPackageTest();
         Assertions.assertThat(checkFieldTo).contains(letterForMe);
-        SleepUtils.sleep(1000);
+        /*SleepUtils.sleep(1000);*/
         var checkFieldSubject = indexPage.getSubjectFieldInsideInPackageTest();
         Assertions.assertThat(subjectForMe).isEqualTo(checkFieldSubject);
-        SleepUtils.sleep(1000);
+        /*SleepUtils.sleep(1000);*/
         var checkFieldBody = indexPage.getBodyFieldInsideInPackageTest();
         Assertions.assertThat(checkFieldBody).contains(bodyLetter);
     }
@@ -138,10 +138,10 @@ public class Steps extends BasePage {
     public void formingAndSendingLetterToYourselfForScenarioThree(String letterForMe,
                                                                   String subject, String bodyLetter) {
         indexPage.clickFolderToMyselfLetter();
-        SleepUtils.sleep(1000);
+        /*SleepUtils.sleep(1000);*/
         final var emailsBeforeSendingInToMyself = indexPage.getEmailInToMyself();
         indexPage.clickGarbageButton();
-        SleepUtils.sleep(1000);
+        /*SleepUtils.sleep(1000);*/
         final var emailsBeforeDeleteInGarbage = indexPage.getEmailInGarbage();
         indexPage.clickWriteALetterButton();
         indexPage.fillToField(letterForMe);
@@ -151,7 +151,7 @@ public class Steps extends BasePage {
         indexPage.clickCloseFrameButton2();
         indexPage.clickIncomingButtonInLayoutColumn();
         indexPage.clickFolderToMyselfLetter();
-        SleepUtils.sleep(1000);
+        /*SleepUtils.sleep(1000);*/
         var emailsAfterSendingInToMyself = indexPage.getEmailInToMyself();
         Assertions.assertThat(emailsBeforeSendingInToMyself < emailsAfterSendingInToMyself).isTrue();
     }
@@ -159,13 +159,13 @@ public class Steps extends BasePage {
     @Step("Проверка на соответствие полей 'Кому', 'Тема' и тела письма")
     public void checkOfFilledFieldsInScenarioThree(String letterForMe, String subject, String bodyLetter) {
         indexPage.clickLastLetter();
-        SleepUtils.sleep(1000);
+       /*SleepUtils.sleep(1000);*/
         var checkFieldTo = indexPage.getToFieldInsideInPackageTest();
         Assertions.assertThat(checkFieldTo).contains(letterForMe);
-        SleepUtils.sleep(1000);
+        /*SleepUtils.sleep(1000);*/
         var checkFieldSubject = indexPage.getSubjectFieldInsideInPackageTest();
         Assertions.assertThat(subject).isEqualTo(checkFieldSubject);
-        SleepUtils.sleep(1000);
+        /*SleepUtils.sleep(1000);*/
         var checkFieldBody = indexPage.getBodyFieldInsideInPackageTest();
         Assertions.assertThat(checkFieldBody).contains(bodyLetter);
     }
@@ -175,7 +175,7 @@ public class Steps extends BasePage {
         indexPage.clickDeleteButton();
         indexPage.clickCloseFrameButtonAfterDeletedLetter();
         indexPage.clickGarbageButton();
-        SleepUtils.sleep(1000);
+        /*SleepUtils.sleep(1000);*/
     }
 
 }
