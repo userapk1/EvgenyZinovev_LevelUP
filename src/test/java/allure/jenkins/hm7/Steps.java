@@ -93,7 +93,7 @@ public class Steps extends BasePage{
     }
 
     //сценарий2
-    @Step("Формирование, отправка письма себе, и проверка отправления письма")
+    @Step("Формирование, отправка письма, и проверка отправления письма")
     public void formingAndSendingLetterToYourselfForScenarioTwo(String letterForMe, String subjectForMe, String bodyLetter) {
         indexPage.clickLeftSideMenu();
         indexPage.clickTestButtonInLayoutColumn();
@@ -155,21 +155,21 @@ public class Steps extends BasePage{
     }
 
     @Step("Проверка на соответствие полей 'Кому', 'Тема' и тела письма")
-    public void checkOfFilledFieldsInScenarioThree(String letterForMe, String subjectForMe, String bodyLetter) {
+    public void checkOfFilledFieldsInScenarioThree(String letterForMe, String subject, String bodyLetter) {
         indexPage.clickLastLetter();
         SleepUtils.sleep(1000);
         var checkFieldTo = indexPage.getToFieldInsideInPackageTest();
         Assertions.assertThat(checkFieldTo).contains(letterForMe);
         SleepUtils.sleep(1000);
         var checkFieldSubject = indexPage.getSubjectFieldInsideInPackageTest();
-        Assertions.assertThat(subjectForMe).isEqualTo(checkFieldSubject);
+        Assertions.assertThat(subject).isEqualTo(checkFieldSubject);
         SleepUtils.sleep(1000);
         var checkFieldBody = indexPage.getBodyFieldInsideInPackageTest();
         Assertions.assertThat(checkFieldBody).contains(bodyLetter);
     }
 
     @Step("Удаление письма")
-    public void deleteLetter(String letterForMe, String subjectForMe, String bodyLetter) {
+    public void deleteLetter() {
         indexPage.clickDeleteButton();
         indexPage.clickCloseFrameButtonAfterDeletedLetter();
         indexPage.clickGarbageButton();
